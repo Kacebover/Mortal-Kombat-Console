@@ -24,12 +24,13 @@ namespace MortalKombat
         public static int cdown;
         static void Main()
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("                                                     MORTAL KOMBAT");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Управление :");
             Console.WriteLine("     Игрок 1: Удар - J, блок - O, чистый блок - ;, присесть/встать - S, вперед - D, назад - A, вкл/выкл бой против ИИ - P (англ)");
-            Console.WriteLine("     Игрок 2: Удар - 4, блок - 5, чистый блок - 6, присесть/встать - 8 или 2, вперёд - 1, назад - 3, вкл/выкл бой против ИИ - 9");
+            Console.WriteLine("     Игрок 2: Удар - 4, блок - 5, чистый блок - 6, присесть/встать - ↓, вперёд - ←, назад - →, вкл/выкл бой против ИИ - 9");
             Console.WriteLine("     Бой с ИИ - 9 или P (англ)");
             Console.WriteLine("     PageDown или Tab - пауза");
             Console.WriteLine("     Закончить игру - esc или end");
@@ -89,7 +90,17 @@ namespace MortalKombat
                     Console.ForegroundColor = ConsoleColor.Green;
                     health1 = 1000;
                     health2 = 1000;
-                    Console.WriteLine("Хп сброшены до 1000 у обоих игроков");
+                    block1 = 0;
+                    block2 = 0;
+                    place1 = 4;
+                    place2 = 7;
+                    fltime1 = 0;
+                    fltime2 = 0;
+                    ltime1 = 0;
+                    ltime2 = 0;
+                    sitting1 = 0;
+                    sitting2 = 0;
+                    Console.WriteLine("Всё сброшено по-умолчанию у обоих игроков");
                 }
                 if (health1 <= 0)
                 {
@@ -99,14 +110,24 @@ namespace MortalKombat
                     Console.ForegroundColor = ConsoleColor.Green;
                     health1 = 1000;
                     health2 = 1000;
-                    Console.WriteLine("Хп сброшены до 1000 у обоих игроков");
+                    block1 = 0;
+                    block2 = 0;
+                    place1 = 4;
+                    place2 = 7;
+                    fltime1 = 0;
+                    fltime2 = 0;
+                    ltime1 = 0;
+                    ltime2 = 0;
+                    sitting1 = 0;
+                    sitting2 = 0;
+                    Console.WriteLine("Всё сброшено по-умолчанию у обоих игроков");
                 }
                 Console.ForegroundColor = ConsoleColor.White;
                 hit = Console.ReadKey();
                 Console.WriteLine();
                 if (pause == 0)
                 {
-                    if (hit.KeyChar.ToString() == "j" || hit.KeyChar.ToString() == "J")
+                    if (hit.Key == ConsoleKey.J)
                     {
                         if (block1 == 0)
                         {
@@ -143,7 +164,7 @@ namespace MortalKombat
                             }
                         }
                     }
-                    else if (hit.KeyChar.ToString() == "4")
+                    else if (hit.Key == ConsoleKey.NumPad4)
                     {
                         if (block2 == 0)
                         {
@@ -180,7 +201,7 @@ namespace MortalKombat
                             }
                         }
                     }
-                    else if (hit.KeyChar.ToString() == "o" || hit.KeyChar.ToString() == "O")
+                    else if (hit.Key == ConsoleKey.O)
                     {
                         if (ltime1 == 0)
                         {
@@ -196,7 +217,7 @@ namespace MortalKombat
                             }
                         }
                     }
-                    else if (hit.KeyChar.ToString() == "5")
+                    else if (hit.Key == ConsoleKey.NumPad5)
                     {
                         if (ltime2 == 0)
                         {
@@ -221,7 +242,7 @@ namespace MortalKombat
                         fltime2 = 2;
                         Console.WriteLine("Игрок 1 приготовился использовать чистый блок");
                     }
-                    else if (hit.KeyChar.ToString() == "6")
+                    else if (hit.Key == ConsoleKey.NumPad6)
                     {
                         if (block2 == 1)
                         {
@@ -230,7 +251,7 @@ namespace MortalKombat
                         fltime1 = 2;
                         Console.WriteLine("Игрок 2 приготовился использовать чистый блок");
                     }
-                    else if (hit.KeyChar.ToString() == "s" || hit.KeyChar.ToString() == "S")
+                    else if (hit.Key == ConsoleKey.S)
                     {
                         if (sitting1 == 0)
                         {
@@ -243,7 +264,7 @@ namespace MortalKombat
                             Console.WriteLine("Игрок 1 встал");
                         }
                     }
-                    else if (hit.KeyChar.ToString() == "8" || hit.KeyChar.ToString() == "2")
+                    else if (hit.Key == ConsoleKey.DownArrow)
                     {
                         if (sitting2 == 0)
                         {
@@ -256,7 +277,7 @@ namespace MortalKombat
                             Console.WriteLine("Игрок 2 встал");
                         }
                     }
-                    else if (hit.KeyChar.ToString() == "P" || hit.KeyChar.ToString() == "p")
+                    else if (hit.Key == ConsoleKey.P)
                     {
                         if (aifighting2 == 0 & aifighting1 == 0)
                         {
@@ -270,7 +291,7 @@ namespace MortalKombat
                             Console.WriteLine("ИИ выключен");
                         }
                     }
-                    else if (hit.KeyChar.ToString() == "9")
+                    else if (hit.Key == ConsoleKey.NumPad9)
                     {
                         if (aifighting1 == 0 & aifighting2 == 0)
                         {
@@ -284,7 +305,7 @@ namespace MortalKombat
                             Console.WriteLine("ИИ выключен");
                         }
                     }
-                    else if (hit.KeyChar.ToString() == "a" || hit.KeyChar.ToString() == "A")
+                    else if (hit.Key == ConsoleKey.A)
                     {
                         if (block1 == 0)
                         {
@@ -295,7 +316,7 @@ namespace MortalKombat
                             }
                         }
                     }
-                    else if (hit.KeyChar.ToString() == "d" || hit.KeyChar.ToString() == "D")
+                    else if (hit.Key == ConsoleKey.D)
                     {
                         if (block1 == 0)
                         {
@@ -309,7 +330,7 @@ namespace MortalKombat
                             }
                         }
                     }
-                    else if (hit.KeyChar.ToString() == "1")
+                    else if (hit.Key == ConsoleKey.LeftArrow)
                     {
                         if (block2 == 0)
                         {
@@ -323,7 +344,7 @@ namespace MortalKombat
                             }
                         }
                     }
-                    else if (hit.KeyChar.ToString() == "3")
+                    else if (hit.Key == ConsoleKey.RightArrow)
                     {
                         if (block2 == 0)
                         {
@@ -359,7 +380,7 @@ namespace MortalKombat
                     {
                         Console.WriteLine("Управление :");
                         Console.WriteLine("     Игрок 1: Удар - J, блок - O, чистый блок - ;, присесть/встать - S, вперед - D, назад - A, вкл/выкл бой против ИИ - P (англ)");
-                        Console.WriteLine("     Игрок 2: Удар - 4, блок - 5, чистый блок - 6, присесть/встать - 8 или 2, вперёд - 1, назад - 3, вкл/выкл бой против ИИ - 9");
+                        Console.WriteLine("     Игрок 2: Удар - 4, блок - 5, чистый блок - 6, присесть/встать - ↓, вперёд - ←, назад - →, вкл/выкл бой против ИИ - 9");
                         Console.WriteLine("     Бой с ИИ - 9 или P (англ)");
                         Console.WriteLine("     PageDown или Tab - пауза");
                         Console.WriteLine("     Закончить игру - esc или end");
@@ -457,7 +478,17 @@ namespace MortalKombat
                         Console.ForegroundColor = ConsoleColor.Green;
                         health1 = 1000;
                         health2 = 1000;
-                        Console.WriteLine("Хп сброшены до 1000 у обоих игроков");
+                        block1 = 0;
+                        block2 = 0;
+                        place1 = 4;
+                        place2 = 7;
+                        fltime1 = 0;
+                        fltime2 = 0;
+                        ltime1 = 0;
+                        ltime2 = 0;
+                        sitting1 = 0;
+                        sitting2 = 0;
+                        Console.WriteLine("Всё сброшено по-умолчанию у обоих игроков");
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                     if (health1 <= 0)
@@ -468,7 +499,17 @@ namespace MortalKombat
                         Console.ForegroundColor = ConsoleColor.Green;
                         health1 = 1000;
                         health2 = 1000;
-                        Console.WriteLine("Хп сброшены до 1000 у обоих игроков");
+                        block1 = 0;
+                        block2 = 0;
+                        place1 = 4;
+                        place2 = 7;
+                        fltime1 = 0;
+                        fltime2 = 0;
+                        ltime1 = 0;
+                        ltime2 = 0;
+                        sitting1 = 0;
+                        sitting2 = 0;
+                        Console.WriteLine("Всё сброшено по-умолчанию у обоих игроков");
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                 }
