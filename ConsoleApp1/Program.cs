@@ -132,13 +132,15 @@ namespace MortalKombat
                 }
                 Console.ForegroundColor = ConsoleColor.White;
                 hit = Console.ReadKey();
+                stopwatch2.Stop();
+                TimeSpan ts2 = stopwatch2.Elapsed;
+                stopwatch4.Stop();
+                TimeSpan ts4 = stopwatch4.Elapsed;
                 Console.WriteLine();
                 if (pause == 0)
                 {
                     if (hit.Key == ConsoleKey.J || hit.Key == ConsoleKey.I || hit.Key == ConsoleKey.K || hit.Key == ConsoleKey.L)
                     {
-                        stopwatch2.Stop();
-                        TimeSpan ts2 = stopwatch2.Elapsed;
                         if (block1 == 0)
                         {
                             if (ts2.Milliseconds == 0 & ts2.Seconds == 0)
@@ -238,13 +240,9 @@ namespace MortalKombat
                                 }
                             }
                         }
-                        stopwatch2.Restart();
-                        stopwatch2.Stop();
                     }
                     else if (hit.Key == ConsoleKey.NumPad4 || hit.Key == ConsoleKey.NumPad1 || hit.Key == ConsoleKey.NumPad2 || hit.Key == ConsoleKey.NumPad3)
                     {
-                        stopwatch4.Stop();
-                        TimeSpan ts4 = stopwatch4.Elapsed;
                         if (block2 == 0)
                         {
                             if (ts4.Milliseconds == 0 & ts4.Seconds == 0)
@@ -344,8 +342,6 @@ namespace MortalKombat
                                 }
                             }
                         }
-                        stopwatch4.Restart();
-                        stopwatch4.Stop();
                     }
                     else if (hit.Key == ConsoleKey.O)
                     {
@@ -593,6 +589,16 @@ namespace MortalKombat
                         Console.WriteLine("     В бою с ИИ - ИИ будет игроком 2 и будет бить каждые 100мс");
                         Console.WriteLine("     Спецприёмы работают только в том случае, если игрок, который его совершает не держит блок и игроки находятся в одном положении, но спецприём можно заблокировать");
                     }
+                }
+                if (ts2.Milliseconds > 0 || ts2.Seconds > 0)
+                {
+                    stopwatch2.Restart();
+                    stopwatch2.Stop();
+                }
+                if (ts4.Milliseconds > 0 || ts4.Milliseconds > 0)
+                {
+                    stopwatch4.Restart();
+                    stopwatch4.Stop();
                 }
                 if (hit.Key == ConsoleKey.Escape || hit.Key == ConsoleKey.End)
                     return;
