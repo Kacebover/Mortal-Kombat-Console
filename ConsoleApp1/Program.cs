@@ -137,44 +137,47 @@ namespace MortalKombat
                 {
                     if (hit.Key == ConsoleKey.J || hit.Key == ConsoleKey.I || hit.Key == ConsoleKey.K || hit.Key == ConsoleKey.L)
                     {
+                        stopwatch2.Stop();
+                        TimeSpan ts2 = stopwatch2.Elapsed;
                         if (block1 == 0)
                         {
-                            if (place2 - place1 == 1)
+                            if (ts2.Milliseconds == 0 & ts2.Seconds == 0)
                             {
-                                if (sitting1 == sitting2)
+                                if (place2 - place1 == 1)
                                 {
-                                    if (fltime1 == 1)
+                                    if (sitting1 == sitting2)
                                     {
-                                        ltime1 = 2;
-                                        Console.WriteLine("Игрок 2 отбил атаку чистым блоком");
+                                        if (fltime1 == 1)
+                                        {
+                                            ltime1 = 2;
+                                            Console.WriteLine("Игрок 2 отбил атаку чистым блоком");
+                                        }
                                     }
-                                }
-                                else if (sitting1 != sitting2)
-                                {
-                                    if (fltime1 == 1)
+                                    else if (sitting1 != sitting2)
                                     {
-                                        Console.WriteLine("Игрок 2 не туда поставил чистый блок");
+                                        if (fltime1 == 1)
+                                        {
+                                            Console.WriteLine("Игрок 2 не туда поставил чистый блок");
+                                        }
                                     }
-                                }
-                                if (ltime1 == 0)
-                                {
-                                    if (block2 == 0)
+                                    if (ltime1 == 0)
                                     {
-                                        health2 -= 10;
-                                        Console.WriteLine("Игрок 2 получил урон");
-                                    }
-                                    else if (block2 == 1)
-                                    {
-                                        health2 -= 0.5;
-                                        Console.WriteLine("Игрок 2 заблокировал удар");
+                                        if (block2 == 0)
+                                        {
+                                            health2 -= 10;
+                                            Console.WriteLine("Игрок 2 получил урон");
+                                        }
+                                        else if (block2 == 1)
+                                        {
+                                            health2 -= 0.5;
+                                            Console.WriteLine("Игрок 2 заблокировал удар");
+                                        }
                                     }
                                 }
                             }
                             if (hit.Key == ConsoleKey.J)
                             {
-                                stopwatch2.Stop();
-                                TimeSpan ts2 = stopwatch2.Elapsed;
-                                if (ts2.Milliseconds < 300 & ts2.Milliseconds > 0)
+                                if (ts2.Milliseconds < 300 & ts2.Milliseconds > 0 & ts2.Seconds == 0)
                                 {
                                     if (fltime1 == 1)
                                     {
@@ -202,14 +205,10 @@ namespace MortalKombat
                                         }
                                     }
                                 }
-                                stopwatch2.Restart();
-                                stopwatch2.Stop();
                             }
                             else if (hit.Key == ConsoleKey.I)
                             {
-                                stopwatch2.Stop();
-                                TimeSpan ts2 = stopwatch2.Elapsed;
-                                if (ts2.Milliseconds < 300 & ts2.Milliseconds > 0)
+                                if (ts2.Milliseconds < 300 & ts2.Milliseconds > 0 & ts2.Seconds == 0)
                                 {
                                     if (fltime1 == 1)
                                     {
@@ -237,51 +236,54 @@ namespace MortalKombat
                                         }
                                     }
                                 }
-                                stopwatch2.Restart();
-                                stopwatch2.Stop();
                             }
                         }
+                        stopwatch2.Restart();
+                        stopwatch2.Stop();
                     }
                     else if (hit.Key == ConsoleKey.NumPad4 || hit.Key == ConsoleKey.NumPad1 || hit.Key == ConsoleKey.NumPad2 || hit.Key == ConsoleKey.NumPad3)
                     {
+                        stopwatch4.Stop();
+                        TimeSpan ts4 = stopwatch4.Elapsed;
                         if (block2 == 0)
                         {
-                            if (place2 - place1 == 1)
+                            if (ts4.Milliseconds == 0 & ts4.Seconds == 0)
                             {
-                                if (sitting1 == sitting2)
+                                if (place2 - place1 == 1)
                                 {
-                                    if (fltime2 == 1)
+                                    if (sitting1 == sitting2)
                                     {
-                                        ltime2 = 2;
-                                        Console.WriteLine("Игрок 1 отбил атаку чистым блоком");
+                                        if (fltime2 == 1)
+                                        {
+                                            ltime2 = 2;
+                                            Console.WriteLine("Игрок 1 отбил атаку чистым блоком");
+                                        }
                                     }
-                                }
-                                else if (sitting1 != sitting2)
-                                {
-                                    if (fltime2 == 1)
+                                    else if (sitting1 != sitting2)
                                     {
-                                        Console.WriteLine("Игрок 1 не туда поставил чистый блок");
+                                        if (fltime2 == 1)
+                                        {
+                                            Console.WriteLine("Игрок 1 не туда поставил чистый блок");
+                                        }
                                     }
-                                }
-                                if (ltime2 == 0)
-                                {
-                                    if (block1 == 0)
+                                    if (ltime2 == 0)
                                     {
-                                        health1 -= 10;
-                                        Console.WriteLine("Игрок 1 получил урон");
-                                    }
-                                    else if (block1 == 1)
-                                    {
-                                        health1 -= 0.5;
-                                        Console.WriteLine("Игрок 1 заблокировал удар");
+                                        if (block1 == 0)
+                                        {
+                                            health1 -= 10;
+                                            Console.WriteLine("Игрок 1 получил урон");
+                                        }
+                                        else if (block1 == 1)
+                                        {
+                                            health1 -= 0.5;
+                                            Console.WriteLine("Игрок 1 заблокировал удар");
+                                        }
                                     }
                                 }
                             }
                             if (hit.Key == ConsoleKey.NumPad4)
                             {
-                                stopwatch4.Stop();
-                                TimeSpan ts4 = stopwatch4.Elapsed;
-                                if (ts4.Milliseconds < 300 & ts4.Milliseconds > 0)
+                                if (ts4.Milliseconds < 300 & ts4.Milliseconds > 0 & ts4.Seconds == 0)
                                 {
                                     if (fltime2 == 1)
                                     {
@@ -309,14 +311,10 @@ namespace MortalKombat
                                         }
                                     }
                                 }
-                                stopwatch4.Restart();
-                                stopwatch4.Stop();
                             }
                             else if (hit.Key == ConsoleKey.NumPad1)
                             {
-                                stopwatch4.Stop();
-                                TimeSpan ts4 = stopwatch4.Elapsed;
-                                if (ts4.Milliseconds < 300 & ts4.Milliseconds > 0)
+                                if (ts4.Milliseconds < 300 & ts4.Milliseconds > 0 & ts4.Seconds == 0)
                                 {
                                     if (fltime2 == 1)
                                     {
@@ -344,10 +342,10 @@ namespace MortalKombat
                                         }
                                     }
                                 }
-                                stopwatch4.Restart();
-                                stopwatch4.Stop();
                             }
                         }
+                        stopwatch4.Restart();
+                        stopwatch4.Stop();
                     }
                     else if (hit.Key == ConsoleKey.O)
                     {
