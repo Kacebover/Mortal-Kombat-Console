@@ -132,8 +132,12 @@ namespace MortalKombat
                 }
                 Console.ForegroundColor = ConsoleColor.White;
                 hit = Console.ReadKey();
+                stopwatch1.Stop();
+                TimeSpan ts1 = stopwatch1.Elapsed;
                 stopwatch2.Stop();
                 TimeSpan ts2 = stopwatch2.Elapsed;
+                stopwatch3.Stop();
+                TimeSpan ts3 = stopwatch3.Elapsed;
                 stopwatch4.Stop();
                 TimeSpan ts4 = stopwatch4.Elapsed;
                 Console.WriteLine();
@@ -494,14 +498,10 @@ namespace MortalKombat
                                         Console.WriteLine("Игрок 1 переместился на клетку вперед");
                                     }
                                 }
-                                stopwatch1.Stop();
-                                TimeSpan ts1 = stopwatch1.Elapsed;
                                 if (ts1.Milliseconds < 300 & ts1.Milliseconds > 0)
                                 {
                                     stopwatch2.Start();
                                 }
-                                stopwatch1.Restart();
-                                stopwatch1.Stop();
                             }
                         }
                     }
@@ -519,14 +519,10 @@ namespace MortalKombat
                                         Console.WriteLine("Игрок 2 переместился на клетку вперёд");
                                     }
                                 }
-                                stopwatch3.Stop();
-                                TimeSpan ts3 = stopwatch3.Elapsed;
                                 if (ts3.Milliseconds < 300 & ts3.Milliseconds > 0)
                                 {
                                     stopwatch4.Start();
                                 }
-                                stopwatch3.Restart();
-                                stopwatch3.Stop();
                             }
                         }
                     }
@@ -590,10 +586,20 @@ namespace MortalKombat
                         Console.WriteLine("     Спецприёмы работают только в том случае, если игрок, который его совершает не держит блок и игроки находятся в одном положении, но спецприём можно заблокировать");
                     }
                 }
+                if (ts1.Milliseconds > 0 || ts1.Seconds > 0)
+                {
+                    stopwatch1.Restart();
+                    stopwatch1.Stop();
+                }
                 if (ts2.Milliseconds > 0 || ts2.Seconds > 0)
                 {
                     stopwatch2.Restart();
                     stopwatch2.Stop();
+                }
+                if (ts3.Milliseconds > 0 || ts3.Seconds > 0)
+                {
+                    stopwatch3.Restart();
+                    stopwatch3.Stop();
                 }
                 if (ts4.Milliseconds > 0 || ts4.Milliseconds > 0)
                 {
