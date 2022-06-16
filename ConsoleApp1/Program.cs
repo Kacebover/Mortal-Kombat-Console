@@ -57,8 +57,7 @@ namespace MortalKombat
             ConsoleKeyInfo hit;
             Timer timer1 = new Timer(aifightvsone, null, 0, 100);
             Timer timer2 = new Timer(aifightvstwo, null, 0, 100);
-            Timer timer3 = new Timer(beeper, null, 0, 1000);
-            Timer timer4 = new Timer(deather, null, 0, 1);
+            Timer timer3 = new Timer(deather, null, 0, 1);
             Stopwatch stopwatch1 = new Stopwatch();
             Stopwatch stopwatch2 = new Stopwatch();
             Stopwatch stopwatch3 = new Stopwatch();
@@ -166,7 +165,10 @@ namespace MortalKombat
                     Console.WriteLine("Всё сброшено по-умолчанию у обоих игроков");
                 }
                 Console.ForegroundColor = ConsoleColor.White;
-                hit = Console.ReadKey();
+                while (Console.KeyAvailable)
+                    Console.ReadKey(true);
+                hit = Console.ReadKey(true);
+                Console.WriteLine(hit.Key);
                 stopwatch1.Stop();
                 TimeSpan ts1 = stopwatch1.Elapsed;
                 stopwatch2.Stop();
@@ -183,7 +185,6 @@ namespace MortalKombat
                 TimeSpan ts7 = stopwatch7.Elapsed;
                 stopwatch8.Stop();
                 TimeSpan ts8 = stopwatch8.Elapsed;
-                Console.WriteLine();
                 if (pause == 0)
                 {
                     if (hit.Key == ConsoleKey.J || hit.Key == ConsoleKey.I || hit.Key == ConsoleKey.K || hit.Key == ConsoleKey.L)
@@ -755,6 +756,13 @@ namespace MortalKombat
                         Console.Write("Игра будет возобновлена через: ");
                         time = 4;
                         cdown = 1;
+                        beeper();
+                        Thread.Sleep(700);
+                        beeper();
+                        Thread.Sleep(700);
+                        beeper();
+                        Thread.Sleep(700);
+                        beeper();
                     }
                 }
                 if (pause == 1)
@@ -1079,34 +1087,31 @@ namespace MortalKombat
                 }
             }
         }
-        public static void beeper(object obj)
+        public static void beeper()
         {
-            if (cdown == 1)
+            time--;
+            musicer();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            if (time == 3)
             {
-                time--;
-                musicer();
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                if (time == 3)
-                {
-                    Console.Write("3сек, ");
-                }
-                else if (time == 2)
-                {
-                    Console.Write("2сек, ");
-                }
-                else if (time == 1)
-                {
-                    Console.Write("1сек");
-                }
-                else if (time == 0)
-                {
-                    pause = 0;
-                    cdown = 0;
-                    Console.WriteLine();
-                    Console.WriteLine("Игра возобновлена");
-                }
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("3сек, ");
             }
+            else if (time == 2)
+            {
+                Console.Write("2сек, ");
+            }
+            else if (time == 1)
+            {
+                Console.Write("1сек");
+            }
+            else if (time == 0)
+            {
+                pause = 0;
+                cdown = 0;
+                Console.WriteLine();
+                Console.WriteLine("Игра возобновлена");
+            }
+            Console.ForegroundColor = ConsoleColor.White;
         }
         public static void deather(object obj)
         {
