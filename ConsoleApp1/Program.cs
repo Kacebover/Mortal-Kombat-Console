@@ -6,19 +6,19 @@ namespace MortalKombat
 {
     class Program
     {
-        public static int block1 = 0; // наличие блока 1 игрока
-        public static int block2 = 0; // наличие блока 2 игрока
+        public static bool block1 = false; // наличие блока 1 игрока
+        public static bool block2 = false; // наличие блока 2 игрока
         public static double health1 = 1000; // хп 1 игрока
         public static double health2 = 1000; // хп 2 игрока
-        public static int pause = 0; // наличие паузы
+        public static bool pause = false; // наличие паузы
         public static int ltime1 = 0; // потерянное время 1 игрока
         public static int ltime2 = 0; // потерянное время 2 игрока
         public static int fltime1 = 0; // возможная потеря времени 1 игрока
         public static int fltime2 = 0; // возможная потеря времени 2 игрока
-        public static int sitting1 = 0; // сидит ли 1 игрок
-        public static int sitting2 = 0; // сидит ли 2 игрок
-        public static int aifighting1 = 0; // включён ли ИИ за 1 игрока против 2 игрока
-        public static int aifighting2 = 0; // включён ли ИИ за 2 игрока против 1 игрока
+        public static bool sitting1 = false; // сидит ли 1 игрок
+        public static bool sitting2 = false; // сидит ли 2 игрок
+        public static bool aifighting1 = false; // включён ли ИИ за 1 игрока против 2 игрока
+        public static bool aifighting2 = false; // включён ли ИИ за 2 игрока против 1 игрока
         public static int place1 = 4; // местонахождение 1 игрока
         public static int place2 = 7; // местонахождение 2 игрока
         public static int time; // для отсчета после паузы
@@ -84,7 +84,7 @@ namespace MortalKombat
                     fltime1--;
                 if (fltime2 > 0)
                     fltime2--;
-                if (pause == 0)
+                if (pause == false)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.Write("1 игрок: ");
@@ -100,11 +100,11 @@ namespace MortalKombat
                         Console.WriteLine("Игроки в одном положении");
                     else if (sitting1 != sitting2)
                         Console.WriteLine("Игроки в разных положениях");
-                    if (block1 == 1 & block2 == 1)
+                    if (block1 == true & block2 == true)
                         Console.WriteLine("Игрок 1 держит блок, Игрок 2 держит блок");
-                    else if (block1 == 1 & block2 == 0)
+                    else if (block1 == true & block2 == false)
                         Console.WriteLine("Игрок 1 держит блок");
-                    else if (block2 == 1 & block1 == 0)
+                    else if (block2 == true & block1 == false)
                         Console.WriteLine("Игрок 2 держит блок");
                     if (fltime2 == 1)
                         Console.WriteLine("Игрок 1 готов сделать чистый блок");
@@ -112,13 +112,13 @@ namespace MortalKombat
                         Console.WriteLine("Игрок 2 готов сделать чистый блок");
                     Console.ForegroundColor = ConsoleColor.White;
                     position = " ________";
-                    if (sitting1 == 0)
+                    if (sitting1 == false)
                         player1 = "↑";
-                    else if (sitting1 == 1)
+                    else if (sitting1 == true)
                         player1 = "↓";
-                    if (sitting2 == 0)
+                    if (sitting2 == false)
                         player2 = "▲";
-                    else if (sitting2 == 1)
+                    else if (sitting2 == true)
                         player2 = "▼";
                     if (place2 > place1)
                     {
@@ -148,16 +148,16 @@ namespace MortalKombat
                     Console.ForegroundColor = ConsoleColor.Green;
                     health1 = 1000;
                     health2 = 1000;
-                    block1 = 0;
-                    block2 = 0;
+                    block1 = false;
+                    block2 = false;
                     place1 = 4;
                     place2 = 7;
                     fltime1 = 0;
                     fltime2 = 0;
                     ltime1 = 0;
                     ltime2 = 0;
-                    sitting1 = 0;
-                    sitting2 = 0;
+                    sitting1 = false;
+                    sitting2 = false;
                     Console.WriteLine("Всё сброшено по-умолчанию у обоих игроков");
                 }
                 Console.ForegroundColor = ConsoleColor.White;
@@ -181,11 +181,11 @@ namespace MortalKombat
                 ts7 = stopwatch7.Elapsed;
                 stopwatch8.Stop();
                 ts8 = stopwatch8.Elapsed;
-                if (pause == 0)
+                if (pause == false)
                 {
                     if (hit.Key == ConsoleKey.J || hit.Key == ConsoleKey.I || hit.Key == ConsoleKey.K || hit.Key == ConsoleKey.L)
                     {
-                        if (block1 == 0)
+                        if (block1 == false)
                         {
                             striker1();
                             if (hit.Key == ConsoleKey.J)
@@ -204,7 +204,7 @@ namespace MortalKombat
                     }
                     else if (hit.Key == ConsoleKey.NumPad4 || hit.Key == ConsoleKey.NumPad1 || hit.Key == ConsoleKey.NumPad2 || hit.Key == ConsoleKey.NumPad3)
                     {
-                        if (block2 == 0)
+                        if (block2 == false)
                         {
                             striker2();
                             if (hit.Key == ConsoleKey.NumPad4)
@@ -257,15 +257,15 @@ namespace MortalKombat
                     {
                         if (ltime1 == 0)
                         {
-                            if (aifighting2 == 0 & aifighting1 == 0)
+                            if (aifighting2 == false & aifighting1 == false)
                             {
-                                aifighting2 = 1;
+                                aifighting2 = true;
                                 Console.WriteLine("ИИ включён против 1 игрока");
                             }
-                            else if (aifighting2 == 1 || aifighting1 == 1)
+                            else if (aifighting2 == true || aifighting1 == true)
                             {
-                                aifighting1 = 0;
-                                aifighting2 = 0;
+                                aifighting1 = false;
+                                aifighting2 = false;
                                 Console.WriteLine("ИИ выключен");
                             }
                         }
@@ -274,15 +274,15 @@ namespace MortalKombat
                     {
                         if (ltime2 == 0)
                         {
-                            if (aifighting1 == 0 & aifighting2 == 0)
+                            if (aifighting1 == false & aifighting2 == false)
                             {
-                                aifighting1 = 1;
+                                aifighting1 = true;
                                 Console.WriteLine("ИИ включён включён против 2 игрока");
                             }
-                            else if (aifighting1 == 1 || aifighting2 == 1)
+                            else if (aifighting1 == true || aifighting2 == true)
                             {
-                                aifighting1 = 0;
-                                aifighting2 = 0;
+                                aifighting1 = false;
+                                aifighting2 = false;
                                 Console.WriteLine("ИИ выключен");
                             }
                         }
@@ -306,14 +306,14 @@ namespace MortalKombat
                 }
                 if (hit.Key == ConsoleKey.PageDown || hit.Key == ConsoleKey.Tab)
                 {
-                    if (pause == 0)
+                    if (pause == false)
                     {
-                        pause = 1;
+                        pause = true;
                         Console.WriteLine("Поставлена пауза");
                         Console.WriteLine("Введите PageUp или M (англ), чтобы посмотреть управление и правила");
                         Console.WriteLine("PageDown или Tab - возобновить игру");
                     }
-                    else if (pause == 1)
+                    else if (pause == true)
                     {
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.Write("Игра будет возобновлена через: ");
@@ -327,7 +327,7 @@ namespace MortalKombat
                         beeper();
                     }
                 }
-                if (pause == 1)
+                if (pause == true)
                 {
                     if (hit.Key == ConsoleKey.PageUp || hit.Key == ConsoleKey.M)
                     {
@@ -401,9 +401,9 @@ namespace MortalKombat
         }
         public static void aifightvsone(object obj) // ИИ против 1 игрока
         {
-            if (aifighting2 == 1)
+            if (aifighting2 == true)
             {
-                if (pause == 0)
+                if (pause == false)
                 {
                     Console.WriteLine("4");
                     if (place2 - place1 == 1)
@@ -425,12 +425,12 @@ namespace MortalKombat
                         }
                         if (ltime2 == 0)
                         {
-                            if (block1 == 0)
+                            if (block1 == false)
                             {
                                 health1 -= 10;
                                 Console.WriteLine("Игрок 1 получил урон");
                             }
-                            else if (block1 == 1)
+                            else if (block1 == true)
                             {
                                 health1 -= 0.5;
                                 Console.WriteLine("Игрок 1 заблокировал удар");
@@ -459,11 +459,11 @@ namespace MortalKombat
                         Console.WriteLine("Игроки в одном положении");
                     else if (sitting1 != sitting2)
                         Console.WriteLine("Игроки в разных положениях");
-                    if (block1 == 1 & block2 == 1)
+                    if (block1 == true & block2 == true)
                         Console.WriteLine("Игрок 1 держит блок, Игрок 2 держит блок");
-                    else if (block1 == 1 & block2 == 0)
+                    else if (block1 == true & block2 == false)
                         Console.WriteLine("Игрок 1 держит блок");
-                    else if (block2 == 1 & block1 == 0)
+                    else if (block2 == true & block1 == false)
                         Console.WriteLine("Игрок 2 держит блок");
                     if (fltime2 == 1)
                         Console.WriteLine("Игрок 1 готов сделать чистый блок");
@@ -471,13 +471,13 @@ namespace MortalKombat
                         Console.WriteLine("Игрок 2 готов сделать чистый блок");
                     Console.ForegroundColor = ConsoleColor.White;
                     position = " ________";
-                    if (sitting1 == 0)
+                    if (sitting1 == false)
                         player1 = "↑";
-                    else if (sitting1 == 1)
+                    else if (sitting1 == true)
                         player1 = "↓";
-                    if (sitting2 == 0)
+                    if (sitting2 == false)
                         player2 = "▲";
-                    else if (sitting2 == 1)
+                    else if (sitting2 == true)
                         player2 = "▼";
                     if (place2 > place1)
                     {
@@ -506,16 +506,16 @@ namespace MortalKombat
                         Console.ForegroundColor = ConsoleColor.Green;
                         health1 = 1000;
                         health2 = 1000;
-                        block1 = 0;
-                        block2 = 0;
+                        block1 = false;
+                        block2 = false;
                         place1 = 4;
                         place2 = 7;
                         fltime1 = 0;
                         fltime2 = 0;
                         ltime1 = 0;
                         ltime2 = 0;
-                        sitting1 = 0;
-                        sitting2 = 0;
+                        sitting1 = false;
+                        sitting2 = false;
                         Console.WriteLine("Всё сброшено по-умолчанию у обоих игроков");
                     }
                     Console.ForegroundColor = ConsoleColor.White;
@@ -524,9 +524,9 @@ namespace MortalKombat
         }
         public static void aifightvstwo(object obj) // ИИ против 2 игрока
         {
-            if (aifighting1 == 1)
+            if (aifighting1 == true)
             {
-                if (pause == 0)
+                if (pause == false)
                 {
                     Console.WriteLine("J");
                     if (place2 - place1 == 1)
@@ -548,12 +548,12 @@ namespace MortalKombat
                         }
                         if (ltime1 == 0)
                         {
-                            if (block2 == 0)
+                            if (block2 == false)
                             {
                                 health2 -= 10;
                                 Console.WriteLine("Игрок 2 получил урон");
                             }
-                            else if (block2 == 1)
+                            else if (block2 == true)
                             {
                                 health2 -= 0.5;
                                 Console.WriteLine("Игрок 2 заблокировал удар");
@@ -582,11 +582,11 @@ namespace MortalKombat
                         Console.WriteLine("Игроки в одном положении");
                     else if (sitting1 != sitting2)
                         Console.WriteLine("Игроки в разных положениях");
-                    if (block1 == 1 & block2 == 1)
+                    if (block1 == true & block2 == true)
                         Console.WriteLine("Игрок 1 держит блок, Игрок 2 держит блок");
-                    else if (block1 == 1 & block2 == 0)
+                    else if (block1 == true & block2 == false)
                         Console.WriteLine("Игрок 1 держит блок");
-                    else if (block2 == 1 & block1 == 0)
+                    else if (block2 == true & block1 == false)
                         Console.WriteLine("Игрок 2 держит блок");
                     if (fltime2 == 1)
                         Console.WriteLine("Игрок 1 готов сделать чистый блок");
@@ -594,13 +594,13 @@ namespace MortalKombat
                         Console.WriteLine("Игрок 2 готов сделать чистый блок");
                     Console.ForegroundColor = ConsoleColor.White;
                     position = " ________";
-                    if (sitting1 == 0)
+                    if (sitting1 == false)
                         player1 = "↑";
-                    else if (sitting1 == 1)
+                    else if (sitting1 == true)
                         player1 = "↓";
-                    if (sitting2 == 0)
+                    if (sitting2 == false)
                         player2 = "▲";
-                    else if (sitting2 == 1)
+                    else if (sitting2 == true)
                         player2 = "▼";
                     if (place2 > place1)
                     {
@@ -629,16 +629,16 @@ namespace MortalKombat
                         Console.ForegroundColor = ConsoleColor.Green;
                         health1 = 1000;
                         health2 = 1000;
-                        block1 = 0;
-                        block2 = 0;
+                        block1 = false;
+                        block2 = false;
                         place1 = 4;
                         place2 = 7;
                         fltime1 = 0;
                         fltime2 = 0;
                         ltime1 = 0;
                         ltime2 = 0;
-                        sitting1 = 0;
-                        sitting2 = 0;
+                        sitting1 = false;
+                        sitting2 = false;
                         Console.WriteLine("Всё сброшено по-умолчанию у обоих игроков");
                     }
                     Console.ForegroundColor = ConsoleColor.White;
@@ -664,7 +664,7 @@ namespace MortalKombat
             }
             else if (time == 0)
             {
-                pause = 0;
+                pause = false;
                 Console.WriteLine();
                 Console.WriteLine("Игра возобновлена");
             }
@@ -717,12 +717,12 @@ namespace MortalKombat
                     }
                     if (ltime1 == 0)
                     {
-                        if (block2 == 0)
+                        if (block2 == false)
                         {
                             health2 -= 10;
                             Console.WriteLine("Игрок 2 получил урон");
                         }
-                        else if (block2 == 1)
+                        else if (block2 == true)
                         {
                             health2 -= 0.5;
                             Console.WriteLine("Игрок 2 заблокировал удар");
@@ -754,12 +754,12 @@ namespace MortalKombat
                     }
                     if (ltime2 == 0)
                     {
-                        if (block1 == 0)
+                        if (block1 == false)
                         {
                             health1 -= 10;
                             Console.WriteLine("Игрок 1 получил урон");
                         }
-                        else if (block1 == 1)
+                        else if (block1 == true)
                         {
                             health1 -= 0.5;
                             Console.WriteLine("Игрок 1 заблокировал удар");
@@ -772,14 +772,14 @@ namespace MortalKombat
         {
             if (ltime1 == 0)
             {
-                if (block1 == 0)
+                if (block1 == false)
                 {
-                    block1 = 1;
+                    block1 = true;
                     Console.WriteLine("Игрок 1 поставил блок");
                 }
-                else if (block1 == 1)
+                else if (block1 == true)
                 {
-                    block1 = 0;
+                    block1 = false;
                     Console.WriteLine("Игрок 1 отпустил блок");
                 }
             }
@@ -788,14 +788,14 @@ namespace MortalKombat
         {
             if (ltime2 == 0)
             {
-                if (block2 == 0)
+                if (block2 == false)
                 {
-                    block2 = 1;
+                    block2 = true;
                     Console.WriteLine("Игрок 2 поставил блок");
                 }
-                else if (block2 == 1)
+                else if (block2 == false)
                 {
-                    block2 = 0;
+                    block2 = true;
                     Console.WriteLine("Игрок 2 отпустил блок");
                 }
             }
@@ -804,9 +804,9 @@ namespace MortalKombat
         {
             if (ltime1 == 0)
             {
-                if (block1 == 1)
+                if (block1 == true)
                 {
-                    block1 = 0;
+                    block1 = false;
                 }
                 fltime2 = 2;
                 Console.WriteLine("Игрок 1 приготовился использовать чистый блок");
@@ -816,9 +816,9 @@ namespace MortalKombat
         {
             if (ltime2 == 0)
             {
-                if (block2 == 1)
+                if (block2 == true)
                 {
-                    block2 = 0;
+                    block2 = false;
                 }
                 fltime1 = 2;
                 Console.WriteLine("Игрок 2 приготовился использовать чистый блок");
@@ -828,9 +828,9 @@ namespace MortalKombat
         {
             if (ltime1 == 0)
             {
-                if (sitting1 == 0)
+                if (sitting1 == false)
                 {
-                    sitting1 = 1;
+                    sitting1 = true;
                     Console.WriteLine("Игрок 1 присел");
                 }
                 stopwatch5.Start();
@@ -840,9 +840,9 @@ namespace MortalKombat
         {
             if (ltime2 == 0)
             {
-                if (sitting2 == 0)
+                if (sitting2 == false)
                 {
-                    sitting2 = 1;
+                    sitting2 = true;
                     Console.WriteLine("Игрок 2 присел");
                 }
                 stopwatch7.Start();
@@ -852,7 +852,7 @@ namespace MortalKombat
         {
             if (ltime1 == 0)
             {
-                if (block1 == 0)
+                if (block1 == false)
                 {
                     if (place1 > 1)
                     {
@@ -887,7 +887,7 @@ namespace MortalKombat
         {
             if (ltime2 == 0)
             {
-                if (block2 == 0)
+                if (block2 == false)
                 {
                     if (place2 > 1)
                     {
@@ -922,7 +922,7 @@ namespace MortalKombat
         {
             if (ltime1 == 0)
             {
-                if (block1 == 0)
+                if (block1 == false)
                 {
                     if (place1 < 10)
                     {
@@ -957,7 +957,7 @@ namespace MortalKombat
         {
             if (ltime2 == 0)
             {
-                if (block2 == 0)
+                if (block2 == false)
                 {
                     if (place2 < 10)
                     {
@@ -992,9 +992,9 @@ namespace MortalKombat
         {
             if (ltime1 == 0)
             {
-                if (sitting1 == 1)
+                if (sitting1 == true)
                 {
-                    sitting1 = 0;
+                    sitting1 = false;
                     Console.WriteLine("Игрок 1 встал");
                 }
             }
@@ -1003,9 +1003,9 @@ namespace MortalKombat
         {
             if (ltime2 == 0)
             {
-                if (sitting2 == 1)
+                if (sitting2 == true)
                 {
-                    sitting2 = 0;
+                    sitting2 = false;
                     Console.WriteLine("Игрок 2 встал");
                 }
             }
@@ -1016,7 +1016,7 @@ namespace MortalKombat
             {
                 if (ltime1 == 0)
                 {
-                    if (block2 == 0)
+                    if (block2 == false)
                     {
                         if (sitting1 == sitting2)
                         {
@@ -1032,7 +1032,7 @@ namespace MortalKombat
                             Console.WriteLine("Игрок 2 увернулся от цепи");
                         }
                     }
-                    else if (block2 == 1)
+                    else if (block2 == true)
                     {
                         Console.WriteLine("Игрок 2 заблокировал цепь");
                     }
@@ -1045,7 +1045,7 @@ namespace MortalKombat
             {
                 if (ltime1 == 0)
                 {
-                    if (block2 == 0)
+                    if (block2 == false)
                     {
                         if (sitting1 == sitting2)
                         {
@@ -1057,7 +1057,7 @@ namespace MortalKombat
                             Console.WriteLine("Игрок 2 увернулся от стрелы");
                         }
                     }
-                    else if (block2 == 1)
+                    else if (block2 == true)
                     {
                         health2 -= 0.5;
                         Console.WriteLine("Игрок 2 заблокировал стрелу");
@@ -1071,12 +1071,12 @@ namespace MortalKombat
             {
                 if (ltime1 == 0)
                 {
-                    if (block2 == 0)
+                    if (block2 == false)
                     {
                         health2 -= 10;
                         Console.WriteLine("Игрок 1 использовал спецприём Телепорт");
                     }
-                    else if (block2 == 1)
+                    else if (block2 == true)
                     {
                         Console.WriteLine("Игрок 2 заблокировал телепорт");
                     }
@@ -1114,7 +1114,7 @@ namespace MortalKombat
                 }
                 if (ltime2 == 0)
                 {
-                    if (block1 == 0)
+                    if (block1 == false)
                     {
                         if (sitting1 == sitting2)
                         {
@@ -1130,7 +1130,7 @@ namespace MortalKombat
                             Console.WriteLine("Игрок 1 увернулся от цепи");
                         }
                     }
-                    else if (block1 == 1)
+                    else if (block1 == true)
                     {
                         Console.WriteLine("Игрок 1 заблокировал цепь");
                     }
@@ -1148,7 +1148,7 @@ namespace MortalKombat
                 }
                 if (ltime2 == 0)
                 {
-                    if (block1 == 0)
+                    if (block1 == false)
                     {
                         if (sitting1 == sitting2)
                         {
@@ -1160,7 +1160,7 @@ namespace MortalKombat
                             Console.WriteLine("Игрок 1 увернулся от стрелы");
                         }
                     }
-                    else if (block1 == 1)
+                    else if (block1 == true)
                     {
                         health1 -= 0.5;
                         Console.WriteLine("Игрок 1 заблокировал стрелу");
@@ -1174,12 +1174,12 @@ namespace MortalKombat
             {
                 if (ltime2 == 0)
                 {
-                    if (block1 == 0)
+                    if (block1 == false)
                     {
                         health1 -= 10;
                         Console.WriteLine("Игрок 2 использовал спецприём Телепорт");
                     }
-                    else if (block2 == 1)
+                    else if (block2 == true)
                     {
                         Console.WriteLine("Игрок 1 заблокировал телепорт");
                     }
