@@ -229,7 +229,7 @@ namespace MortalKombat
                     {
                         blocker2();
                     }
-                    else if (hit.KeyChar.ToString() == ";")
+                    else if (hit.Key == ConsoleKey.Oem1)
                     {
                         cblocker1();
                     }
@@ -793,9 +793,9 @@ namespace MortalKombat
                     block2 = true;
                     Console.WriteLine("Игрок 2 поставил блок");
                 }
-                else if (block2 == false)
+                else if (block2 == true)
                 {
-                    block2 = true;
+                    block2 = false;
                     Console.WriteLine("Игрок 2 отпустил блок");
                 }
             }
