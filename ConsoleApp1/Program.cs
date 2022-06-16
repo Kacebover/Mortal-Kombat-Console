@@ -23,6 +23,9 @@ namespace MortalKombat
         public static int place2 = 7;
         public static int time;
         public static int cdown;
+        public static string player1;
+        public static string player2;
+        public static string position;
         static void Main()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -30,8 +33,8 @@ namespace MortalKombat
             Console.WriteLine("                                                     MORTAL KOMBAT");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Управление :");
-            Console.WriteLine("     Игрок 1: Удар - J,I,K,L, блок - O, чистый блок - ;, присесть/встать - S, вперед - D, назад - A, вкл/выкл бой против ИИ - P (англ)");
-            Console.WriteLine("     Игрок 2: Удар - 4,1,2,3, блок - 5, чистый блок - 6, присесть/встать - ↓, вперёд - ←, назад - →, вкл/выкл бой против ИИ - 9");
+            Console.WriteLine("     Игрок 1: Удар - J,I,K,L, блок - O, чистый блок - ;, присесть - S, встать - W, вперед - D, назад - A, вкл/выкл бой против ИИ - P (англ)");
+            Console.WriteLine("     Игрок 2: Удар - 4,1,2,3, блок - 5, чистый блок - 6, присесть - ↓, встать - ↑, вперёд - ←, назад - →, вкл/выкл бой против ИИ - 9");
             Console.WriteLine("     Спецприём Гарпун - назад, вперёд, удар1 (J или 4)");
             Console.WriteLine("     Спецприём Выстрел Из Арбалета - назад, вперёд, удар2 (I или 1)");
             Console.WriteLine("     Спецприём Телепорт - присесть/встать, назад, удар3 (K или 2)");
@@ -77,7 +80,14 @@ namespace MortalKombat
                 if (pause == 0)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.WriteLine("1 игрок: " + health1 + "хп, второй игрок: " + health2 + "хп");
+                    Console.Write("1 игрок: ");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(health1 + "хп, ");
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.Write("второй игрок: ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine(health2 + "хп");
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.WriteLine("1 игрок стоит на " + place1 + "клетке, второй игрок на " + place2 + "клетке");
                     if (sitting1 == sitting2)
                         Console.WriteLine("Игроки в одном положении");
@@ -94,6 +104,26 @@ namespace MortalKombat
                     else if (fltime1 == 1)
                         Console.WriteLine("Игрок 2 готов сделать чистый блок");
                     Console.ForegroundColor = ConsoleColor.White;
+                    position = " ________";
+                    if (sitting1 == 0)
+                        player1 = "↑";
+                    else if (sitting1 == 1)
+                        player1 = "↓";
+                    if (sitting2 == 0)
+                        player2 = "▲";
+                    else if (sitting2 == 1)
+                        player2 = "▼";
+                    if (place2 > place1)
+                    {
+                        position = position.Insert(place1, player1);
+                        position = position.Insert(place2, player2);
+                    }
+                    else if (place1 > place2)
+                    {
+                        position = position.Insert(place1 - 1, player1);
+                        position = position.Insert(place2, player2);
+                    }
+                    Console.WriteLine(position);
                 }
                 if(health2 <= 0)
                 {
@@ -160,7 +190,7 @@ namespace MortalKombat
                     {
                         if (block1 == 0)
                         {
-                            if (ts2.Milliseconds == 0 & ts2.Seconds == 0)
+                            if (ts2.Milliseconds > 299 || ts2.Seconds > 0 || ts2.Milliseconds == 0)
                             {
                                 if (place2 - place1 == 1 || place1 - place2 == 1)
                                 {
@@ -284,10 +314,6 @@ namespace MortalKombat
                                                 place1 = 1;
                                             }
                                         }
-                                        if (sitting1 == 0)
-                                            sitting1 = 1;
-                                        if (sitting1 == 1)
-                                            sitting1 = 0;
                                     }
                                 }
                             }
@@ -297,7 +323,7 @@ namespace MortalKombat
                     {
                         if (block2 == 0)
                         {
-                            if (ts4.Milliseconds == 0 & ts4.Seconds == 0)
+                            if (ts4.Milliseconds > 299 || ts4.Seconds > 0 || ts4.Milliseconds == 0)
                             {
                                 if (place2 - place1 == 1 || place1 - place2 == 1)
                                 {
@@ -431,10 +457,6 @@ namespace MortalKombat
                                                 place2 = 10;
                                             }
                                         }
-                                        if (sitting2 == 0)
-                                            sitting2 = 1;
-                                        if (sitting2 == 1)
-                                            sitting2 = 0;
                                     }
                                 }
                             }
@@ -505,12 +527,18 @@ namespace MortalKombat
                                 sitting1 = 1;
                                 Console.WriteLine("Игрок 1 присел");
                             }
-                            else if (sitting1 == 1)
+                            stopwatch5.Start();
+                        }
+                    }
+                    else if (hit.Key == ConsoleKey.W)
+                    {
+                        if (ltime1 == 0)
+                        {
+                            if (sitting1 == 1)
                             {
                                 sitting1 = 0;
                                 Console.WriteLine("Игрок 1 встал");
                             }
-                            stopwatch5.Start();
                         }
                     }
                     else if (hit.Key == ConsoleKey.DownArrow)
@@ -522,12 +550,18 @@ namespace MortalKombat
                                 sitting2 = 1;
                                 Console.WriteLine("Игрок 2 присел");
                             }
-                            else if (sitting2 == 1)
+                            stopwatch7.Start();
+                        }
+                    }
+                    else if (hit.Key == ConsoleKey.UpArrow)
+                    {
+                        if (ltime2 == 0)
+                        {
+                            if (sitting2 == 1)
                             {
                                 sitting2 = 0;
                                 Console.WriteLine("Игрок 2 встал");
                             }
-                            stopwatch7.Start();
                         }
                     }
                     else if (hit.Key == ConsoleKey.P)
@@ -728,8 +762,8 @@ namespace MortalKombat
                     if (hit.Key == ConsoleKey.PageUp || hit.KeyChar.ToString() == "m" || hit.KeyChar.ToString() == "M")
                     {
                         Console.WriteLine("Управление :");
-                        Console.WriteLine("     Игрок 1: Удар - J,I,K,L, блок - O, чистый блок - ;, присесть/встать - S, вперед - D, назад - A, вкл/выкл бой против ИИ - P (англ)");
-                        Console.WriteLine("     Игрок 2: Удар - 4,1,2,3, блок - 5, чистый блок - 6, присесть/встать - ↓, вперёд - ←, назад - →, вкл/выкл бой против ИИ - 9");
+                        Console.WriteLine("     Игрок 1: Удар - J,I,K,L, блок - O, чистый блок - ;, присесть - S, встать - W, вперед - D, назад - A, вкл/выкл бой против ИИ - P (англ)");
+                        Console.WriteLine("     Игрок 2: Удар - 4,1,2,3, блок - 5, чистый блок - 6, присесть - ↓, встать - ↑, вперёд - ←, назад - →, вкл/выкл бой против ИИ - 9");
                         Console.WriteLine("     Спецприём Гарпун - назад, вперёд, удар1 (J или 4)");
                         Console.WriteLine("     Спецприём Выстрел Из Арбалета - назад, вперёд, удар2 (I или 1)");
                         Console.WriteLine("     Спецприём Телепорт - присесть/встать, назад, удар3 (K или 2)");
@@ -840,29 +874,51 @@ namespace MortalKombat
                         fltime1--;
                     if (fltime2 > 0)
                         fltime2--;
-                    if (pause == 0)
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.Write("1 игрок: ");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(health1 + "хп, ");
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.Write("второй игрок: ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine(health2 + "хп");
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.WriteLine("1 игрок стоит на " + place1 + "клетке, второй игрок на " + place2 + "клетке");
+                    if (sitting1 == sitting2)
+                        Console.WriteLine("Игроки в одном положении");
+                    else if (sitting1 != sitting2)
+                        Console.WriteLine("Игроки в разных положениях");
+                    if (block1 == 1 & block2 == 1)
+                        Console.WriteLine("Игрок 1 держит блок, Игрок 2 держит блок");
+                    else if (block1 == 1 & block2 == 0)
+                        Console.WriteLine("Игрок 1 держит блок");
+                    else if (block2 == 1 & block1 == 0)
+                        Console.WriteLine("Игрок 2 держит блок");
+                    if (fltime2 == 1)
+                        Console.WriteLine("Игрок 1 готов сделать чистый блок");
+                    else if (fltime1 == 1)
+                        Console.WriteLine("Игрок 2 готов сделать чистый блок");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    position = " ________";
+                    if (sitting1 == 0)
+                        player1 = "↑";
+                    else if (sitting1 == 1)
+                        player1 = "↓";
+                    if (sitting2 == 0)
+                        player2 = "▲";
+                    else if (sitting2 == 1)
+                        player2 = "▼";
+                    if (place2 > place1)
                     {
-                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                        Console.WriteLine("1 игрок: " + health1 + "хп, второй игрок: " + health2 + "хп");
-                        Console.WriteLine("1 игрок стоит на " + place1 + "клетке, второй игрок на " + place2 + "клетке");
-                        if (sitting1 == 0)
-                            Console.Write("Игрок 1 стоит, ");
-                        else if (sitting1 == 1)
-                            Console.Write("Игрок 1 сидит, ");
-                        if (sitting2 == 0)
-                            Console.WriteLine("Игрок 2 стоит");
-                        else if (sitting2 == 1)
-                            Console.WriteLine("Игрок 2 стоит");
-                        if (block1 == 1)
-                            Console.WriteLine("Игрок 1 держит блок");
-                        if (block2 == 1)
-                            Console.WriteLine("Игрок 2 держит блок");
-                        if (fltime2 == 1)
-                            Console.WriteLine("Игрок 1 готов сделать чистый блок");
-                        else if (fltime1 == 1)
-                            Console.WriteLine("Игрок 2 готов сделать чистый блок");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        position = position.Insert(place1, player1);
+                        position = position.Insert(place2, player2);
                     }
+                    else if (place1 > place2)
+                    {
+                        position = position.Insert(place1 - 1, player1);
+                        position = position.Insert(place2, player2);
+                    }
+                    Console.WriteLine(position);
                     if (health2 <= 0)
                     {
                         Thread.Sleep(1);
@@ -955,24 +1011,50 @@ namespace MortalKombat
                     if (fltime2 > 0)
                         fltime2--;
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.WriteLine("1 игрок: " + health1 + "хп, второй игрок: " + health2 + "хп");
+                    Console.Write("1 игрок: ");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(health1 + "хп, ");
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.Write("второй игрок: ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine(health2 + "хп");
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.WriteLine("1 игрок стоит на " + place1 + "клетке, второй игрок на " + place2 + "клетке");
-                    if (sitting1 == 0)
-                        Console.Write("Игрок 1 стоит, ");
-                    else if (sitting1 == 1)
-                        Console.Write("Игрок 1 сидит, ");
-                    if (sitting2 == 0)
-                        Console.WriteLine("Игрок 2 стоит");
-                    else if (sitting2 == 1)
-                         Console.WriteLine("Игрок 2 стоит");
-                    if (block1 == 1)
-                          Console.WriteLine("Игрок 1 держит блок");
-                    if (block2 == 1)
-                          Console.WriteLine("Игрок 2 держит блок");
+                    if (sitting1 == sitting2)
+                        Console.WriteLine("Игроки в одном положении");
+                    else if (sitting1 != sitting2)
+                        Console.WriteLine("Игроки в разных положениях");
+                    if (block1 == 1 & block2 == 1)
+                        Console.WriteLine("Игрок 1 держит блок, Игрок 2 держит блок");
+                    else if (block1 == 1 & block2 == 0)
+                        Console.WriteLine("Игрок 1 держит блок");
+                    else if (block2 == 1 & block1 == 0)
+                        Console.WriteLine("Игрок 2 держит блок");
                     if (fltime2 == 1)
-                          Console.WriteLine("Игрок 1 готов сделать чистый блок");
+                        Console.WriteLine("Игрок 1 готов сделать чистый блок");
                     else if (fltime1 == 1)
-                           Console.WriteLine("Игрок 2 готов сделать чистый блок");
+                        Console.WriteLine("Игрок 2 готов сделать чистый блок");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    position = " ________";
+                    if (sitting1 == 0)
+                        player1 = "↑";
+                    else if (sitting1 == 1)
+                        player1 = "↓";
+                    if (sitting2 == 0)
+                        player2 = "▲";
+                    else if (sitting2 == 1)
+                        player2 = "▼";
+                    if (place2 > place1)
+                    {
+                        position = position.Insert(place1, player1);
+                        position = position.Insert(place2, player2);
+                    }
+                    else if (place1 > place2)
+                    {
+                        position = position.Insert(place1 - 1, player1);
+                        position = position.Insert(place2, player2);
+                    }
+                    Console.WriteLine(position);
                     if (health2 <= 0)
                     {
                         Thread.Sleep(1);
