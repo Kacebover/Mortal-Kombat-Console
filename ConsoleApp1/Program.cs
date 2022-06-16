@@ -490,11 +490,19 @@ namespace MortalKombat
                         position = position.Insert(place2, player2);
                     }
                     Console.WriteLine(position);
-                    if (health2 <= 0)
+                    if (health2 <= 0 || health1 <= 0)
                     {
-                        Thread.Sleep(1);
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.WriteLine("Игрок 2 проиграл");
+                        Thread.Sleep(1); // это чтоб пикнуло когда игрок умрет, иначе если зажать клавишу и убить игрока, оно не пикнет
+                        if (health2 <= 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine("Игрок 2 проиграл");
+                        }
+                        if (health1 <= 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Игрок 1 проиграл");
+                        }
                         Console.ForegroundColor = ConsoleColor.Green;
                         health1 = 1000;
                         health2 = 1000;
@@ -509,29 +517,8 @@ namespace MortalKombat
                         sitting1 = 0;
                         sitting2 = 0;
                         Console.WriteLine("Всё сброшено по-умолчанию у обоих игроков");
-                        Console.ForegroundColor = ConsoleColor.White;
                     }
-                    if (health1 <= 0)
-                    {
-                        Thread.Sleep(1);
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Игрок 1 проиграл");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        health1 = 1000;
-                        health2 = 1000;
-                        block1 = 0;
-                        block2 = 0;
-                        place1 = 4;
-                        place2 = 7;
-                        fltime1 = 0;
-                        fltime2 = 0;
-                        ltime1 = 0;
-                        ltime2 = 0;
-                        sitting1 = 0;
-                        sitting2 = 0;
-                        Console.WriteLine("Всё сброшено по-умолчанию у обоих игроков");
-                        Console.ForegroundColor = ConsoleColor.White;
-                    }
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
             }
         }
@@ -626,25 +613,33 @@ namespace MortalKombat
                         position = position.Insert(place2, player2);
                     }
                     Console.WriteLine(position);
-                    if (health2 <= 0)
+                    if (health2 <= 0 || health1 <= 0)
                     {
-                        Thread.Sleep(1);
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.WriteLine("Игрок 2 проиграл");
+                        Thread.Sleep(1); // это чтоб пикнуло когда игрок умрет, иначе если зажать клавишу и убить игрока, оно не пикнет
+                        if (health2 <= 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine("Игрок 2 проиграл");
+                        }
+                        if (health1 <= 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Игрок 1 проиграл");
+                        }
                         Console.ForegroundColor = ConsoleColor.Green;
                         health1 = 1000;
                         health2 = 1000;
-                        Console.WriteLine("Хп сброшены до 1000 у обоих игроков");
-                    }
-                    if (health1 <= 0)
-                    {
-                        Thread.Sleep(1);
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Игрок 1 проиграл");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        health1 = 1000;
-                        health2 = 1000;
-                        Console.WriteLine("Хп сброшены до 1000 у обоих игроков");
+                        block1 = 0;
+                        block2 = 0;
+                        place1 = 4;
+                        place2 = 7;
+                        fltime1 = 0;
+                        fltime2 = 0;
+                        ltime1 = 0;
+                        ltime2 = 0;
+                        sitting1 = 0;
+                        sitting2 = 0;
+                        Console.WriteLine("Всё сброшено по-умолчанию у обоих игроков");
                     }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
