@@ -6,42 +6,45 @@ namespace MortalKombat
 {
     class Program
     {
-        public static bool block1 = false; // наличие блока 1 игрока
-        public static bool block2 = false; // наличие блока 2 игрока
-        public static double health1 = 1000; // хп 1 игрока
-        public static double health2 = 1000; // хп 2 игрока
-        public static bool pause = false; // наличие паузы
-        public static int ltime1 = 0; // потерянное время 1 игрока
-        public static int ltime2 = 0; // потерянное время 2 игрока
-        public static int fltime1 = 0; // возможная потеря времени 1 игрока
-        public static int fltime2 = 0; // возможная потеря времени 2 игрока
-        public static bool sitting1 = false; // сидит ли 1 игрок
-        public static bool sitting2 = false; // сидит ли 2 игрок
-        public static bool aifighting1 = false; // включён ли ИИ за 1 игрока против 2 игрока
-        public static bool aifighting2 = false; // включён ли ИИ за 2 игрока против 1 игрока
-        public static int place1 = 4; // местонахождение 1 игрока
-        public static int place2 = 7; // местонахождение 2 игрока
-        public static int time; // для отсчета после паузы
-        public static string player1; // для модельки перса 1 игрока
-        public static string player2; // для модельки перса 2 игрока
-        public static string position; // поле боя
-        public static ConsoleKeyInfo hit; // ReadKey
-        public static Stopwatch stopwatch1 = new Stopwatch();
-        public static Stopwatch stopwatch2 = new Stopwatch();
-        public static Stopwatch stopwatch3 = new Stopwatch();
-        public static Stopwatch stopwatch4 = new Stopwatch();
-        public static Stopwatch stopwatch5 = new Stopwatch();
-        public static Stopwatch stopwatch6 = new Stopwatch();
-        public static Stopwatch stopwatch7 = new Stopwatch();
-        public static Stopwatch stopwatch8 = new Stopwatch();
-        public static TimeSpan ts1 = stopwatch1.Elapsed;
-        public static TimeSpan ts2 = stopwatch2.Elapsed;
-        public static TimeSpan ts3 = stopwatch3.Elapsed;
-        public static TimeSpan ts4 = stopwatch4.Elapsed;
-        public static TimeSpan ts5 = stopwatch5.Elapsed;
-        public static TimeSpan ts6 = stopwatch6.Elapsed;
-        public static TimeSpan ts7 = stopwatch7.Elapsed;
-        public static TimeSpan ts8 = stopwatch8.Elapsed;
+        static bool block1 = false; // наличие блока 1 игрока
+        static bool block2 = false; // наличие блока 2 игрока
+        static double health1 = 1000; // хп 1 игрока
+        static double health2 = 1000; // хп 2 игрока
+        static bool pause = false; // наличие паузы
+        static int ltime1 = 0; // потерянное время 1 игрока
+        static int ltime2 = 0; // потерянное время 2 игрока
+        static int fltime1 = 0; // возможная потеря времени 1 игрока
+        static int fltime2 = 0; // возможная потеря времени 2 игрока
+        static bool sitting1 = false; // сидит ли 1 игрок
+        static bool sitting2 = false; // сидит ли 2 игрок
+        static bool aifighting1 = false; // включён ли ИИ за 1 игрока против 2 игрока
+        static bool aifighting2 = false; // включён ли ИИ за 2 игрока против 1 игрока
+        static int place1 = 4; // местонахождение 1 игрока
+        static int place2 = 7; // местонахождение 2 игрока
+        static int time; // для отсчета после паузы
+        static string player1; // для модельки перса 1 игрока
+        static string player2; // для модельки перса 2 игрока
+        static string positiontop; // верхнее поле боя 
+        static string positionlow; // нижнее поле боя 
+        static bool topplat1 = false; // верхняя или нижняя платформа у 1 игрока
+        static bool topplat2 = false; // верхняя или нижняя платформа у 1 игрока
+        static ConsoleKeyInfo hit; // ReadKey
+        static Stopwatch stopwatch1 = new Stopwatch();
+        static Stopwatch stopwatch2 = new Stopwatch();
+        static Stopwatch stopwatch3 = new Stopwatch();
+        static Stopwatch stopwatch4 = new Stopwatch();
+        static Stopwatch stopwatch5 = new Stopwatch();
+        static Stopwatch stopwatch6 = new Stopwatch();
+        static Stopwatch stopwatch7 = new Stopwatch();
+        static Stopwatch stopwatch8 = new Stopwatch();
+        static TimeSpan ts1 = stopwatch1.Elapsed;
+        static TimeSpan ts2 = stopwatch2.Elapsed;
+        static TimeSpan ts3 = stopwatch3.Elapsed;
+        static TimeSpan ts4 = stopwatch4.Elapsed;
+        static TimeSpan ts5 = stopwatch5.Elapsed;
+        static TimeSpan ts6 = stopwatch6.Elapsed;
+        static TimeSpan ts7 = stopwatch7.Elapsed;
+        static TimeSpan ts8 = stopwatch8.Elapsed;
         // таймеры для спецприёмов
         static void Main()
         {
@@ -50,8 +53,10 @@ namespace MortalKombat
             Console.WriteLine("                                                     MORTAL KOMBAT");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Управление :");
-            Console.WriteLine("     Игрок 1: Удар - J,I,K,L, блок - O, чистый блок - ;, присесть - S, встать - W, вперед - D, назад - A, вкл/выкл бой против ИИ - P (англ)");
-            Console.WriteLine("     Игрок 2: Удар - 4,1,2,3, блок - 5, чистый блок - 6, присесть - ↓, встать - ↑, вперёд - ←, назад - →, вкл/выкл бой против ИИ - 9");
+            Console.WriteLine("     Игрок 1: Удар - J,I,K,L, блок - O, чистый блок - ;, присесть - S, встать/прыжок - W, вперед - D, назад - A, вкл/выкл бой против ИИ - P (англ)");
+            Console.WriteLine("     Игрок 2: Удар - 4,1,2,3, блок - 5, чистый блок - 6, присесть - ↓, встать/прыжок - ↑, вперёд - ←, назад - →, вкл/выкл бой против ИИ - 9");
+            Console.WriteLine("     Подняться на платформу выше - прыжок");
+            Console.WriteLine("     Опуститься на платформу ниже - дважды присесть");
             Console.WriteLine("     Спецприём Гарпун - назад, вперёд, удар1 (J или 4)");
             Console.WriteLine("     Спецприём Выстрел Из Арбалета - назад, вперёд, удар2 (I или 1)");
             Console.WriteLine("     Спецприём Телепорт - присесть/встать, назад, удар3 (K или 2)");
@@ -96,6 +101,10 @@ namespace MortalKombat
                     Console.WriteLine(health2 + "хп");
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.WriteLine("1 игрок стоит на " + place1 + "клетке, второй игрок на " + place2 + "клетке");
+                    if (topplat1 != topplat2)
+                        Console.WriteLine("Игроки стоят на разных платформах");
+                    else if (topplat1 == topplat2)
+                        Console.WriteLine("Игроки стоят на одной платформе");
                     if (sitting1 == sitting2)
                         Console.WriteLine("Игроки в одном положении");
                     else if (sitting1 != sitting2)
@@ -111,7 +120,8 @@ namespace MortalKombat
                     else if (fltime1 == 1)
                         Console.WriteLine("Игрок 2 готов сделать чистый блок");
                     Console.ForegroundColor = ConsoleColor.White;
-                    position = " ________";
+                    positiontop = " __________";
+                    positionlow = positiontop;
                     if (sitting1 == false)
                         player1 = "↑";
                     else if (sitting1 == true)
@@ -122,15 +132,51 @@ namespace MortalKombat
                         player2 = "▼";
                     if (place2 > place1)
                     {
-                        position = position.Insert(place1, player1);
-                        position = position.Insert(place2, player2);
+                        if (topplat1 == true)
+                        {
+                            positiontop = positiontop.Remove(place1, 1);
+                            positiontop = positiontop.Insert(place1, player1);
+                        }
+                        else if (topplat1 == false)
+                        {
+                            positionlow = positionlow.Remove(place1, 1);
+                            positionlow = positionlow.Insert(place1, player1);
+                        }
+                        if (topplat2 == true)
+                        {
+                            positiontop = positiontop.Remove(place2, 1);
+                            positiontop = positiontop.Insert(place2, player2);
+                        }
+                        else if (topplat2 == false)
+                        {
+                            positionlow = positionlow.Remove(place2, 1);
+                            positionlow = positionlow.Insert(place2, player2);
+                        }
                     }
                     else if (place1 > place2)
                     {
-                        position = position.Insert(place1 - 1, player1);
-                        position = position.Insert(place2, player2);
+                        if (topplat1 == true)
+                        {
+                            positiontop = positiontop.Remove(place1, 1);
+                            positiontop = positiontop.Insert(place1, player1);
+                        }
+                        else if (topplat1 == false)
+                        {
+                            positionlow = positionlow.Remove(place1, 1);
+                            positionlow = positionlow.Insert(place1, player1);
+                        }
+                        if (topplat2 == true)
+                        {
+                            positiontop = positiontop.Remove(place2, 1);
+                            positiontop = positiontop.Insert(place2, player2);
+                        }
+                        else if (topplat2 == false)
+                        {
+                            positionlow = positionlow.Remove(place2, 1);
+                            positionlow = positionlow.Insert(place2, player2);
+                        }
                     }
-                    Console.WriteLine(position);
+                    Console.WriteLine(positiontop + "\n" + positionlow);
                 }
                 if(health2 <= 0 || health1 <= 0)
                 {
@@ -158,6 +204,8 @@ namespace MortalKombat
                     ltime2 = 0;
                     sitting1 = false;
                     sitting2 = false;
+                    topplat1 = false;
+                    topplat2 = false;
                     Console.WriteLine("Всё сброшено по-умолчанию у обоих игроков");
                 }
                 Console.ForegroundColor = ConsoleColor.White;
@@ -187,18 +235,21 @@ namespace MortalKombat
                     {
                         if (block1 == false)
                         {
-                            striker1();
-                            if (hit.Key == ConsoleKey.J)
+                            if (topplat1 == topplat2)
                             {
-                                buttonJ();
-                            }
-                            else if (hit.Key == ConsoleKey.I)
-                            {
-                                buttonI();
-                            }
-                            else if (hit.Key == ConsoleKey.K)
-                            {
-                                buttonK();
+                                striker1();
+                                if (hit.Key == ConsoleKey.J)
+                                {
+                                    buttonJ();
+                                }
+                                else if (hit.Key == ConsoleKey.I)
+                                {
+                                    buttonI();
+                                }
+                                else if (hit.Key == ConsoleKey.K)
+                                {
+                                    buttonK();
+                                }
                             }
                         }
                     }
@@ -206,18 +257,21 @@ namespace MortalKombat
                     {
                         if (block2 == false)
                         {
-                            striker2();
-                            if (hit.Key == ConsoleKey.NumPad4)
+                            if (topplat1 == topplat2)
                             {
-                                button4();
-                            }
-                            else if (hit.Key == ConsoleKey.NumPad1)
-                            {
-                                button1();
-                            }
-                            else if (hit.Key == ConsoleKey.NumPad2)
-                            {
-                                button2();
+                                striker2();
+                                if (hit.Key == ConsoleKey.NumPad4)
+                                {
+                                    button4();
+                                }
+                                else if (hit.Key == ConsoleKey.NumPad1)
+                                {
+                                    button1();
+                                }
+                                else if (hit.Key == ConsoleKey.NumPad2)
+                                {
+                                    button2();
+                                }
                             }
                         }
                     }
@@ -334,6 +388,8 @@ namespace MortalKombat
                         Console.WriteLine("Управление :");
                         Console.WriteLine("     Игрок 1: Удар - J,I,K,L, блок - O, чистый блок - ;, присесть - S, встать - W, вперед - D, назад - A, вкл/выкл бой против ИИ - P (англ)");
                         Console.WriteLine("     Игрок 2: Удар - 4,1,2,3, блок - 5, чистый блок - 6, присесть - ↓, встать - ↑, вперёд - ←, назад - →, вкл/выкл бой против ИИ - 9");
+                        Console.WriteLine("     Подняться на платформу выше - прыжок");
+                        Console.WriteLine("     Опуститься на платформу ниже - дважды присесть");
                         Console.WriteLine("     Спецприём Гарпун - назад, вперёд, удар1 (J или 4)");
                         Console.WriteLine("     Спецприём Выстрел Из Арбалета - назад, вперёд, удар2 (I или 1)");
                         Console.WriteLine("     Спецприём Телепорт - присесть/встать, назад, удар3 (K или 2)");
@@ -455,6 +511,10 @@ namespace MortalKombat
                     Console.WriteLine(health2 + "хп");
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.WriteLine("1 игрок стоит на " + place1 + "клетке, второй игрок на " + place2 + "клетке");
+                    if (topplat1 != topplat2)
+                        Console.WriteLine("Игроки стоят на разных платформах");
+                    else if (topplat1 == topplat2)
+                        Console.WriteLine("Игроки стоят на одной платформе");
                     if (sitting1 == sitting2)
                         Console.WriteLine("Игроки в одном положении");
                     else if (sitting1 != sitting2)
@@ -470,7 +530,8 @@ namespace MortalKombat
                     else if (fltime1 == 1)
                         Console.WriteLine("Игрок 2 готов сделать чистый блок");
                     Console.ForegroundColor = ConsoleColor.White;
-                    position = " ________";
+                    positiontop = " __________";
+                    positionlow = positiontop;
                     if (sitting1 == false)
                         player1 = "↑";
                     else if (sitting1 == true)
@@ -479,17 +540,53 @@ namespace MortalKombat
                         player2 = "▲";
                     else if (sitting2 == true)
                         player2 = "▼";
-                    if (place2 > place1)
+                    if (place2 > place1 || place2 == place1)
                     {
-                        position = position.Insert(place1, player1);
-                        position = position.Insert(place2, player2);
+                        if (topplat1 == true)
+                        {
+                            positiontop = positiontop.Remove(place1, 1);
+                            positiontop = positiontop.Insert(place1, player1);
+                        }
+                        else if (topplat1 == false)
+                        {
+                            positionlow = positionlow.Remove(place1, 1);
+                            positionlow = positionlow.Insert(place1, player1);
+                        }
+                        if (topplat2 == true)
+                        {
+                            positiontop = positiontop.Remove(place2, 1);
+                            positiontop = positiontop.Insert(place2, player2);
+                        }
+                        else if (topplat2 == false)
+                        {
+                            positionlow = positionlow.Remove(place2, 1);
+                            positionlow = positionlow.Insert(place2, player2);
+                        }
                     }
                     else if (place1 > place2)
                     {
-                        position = position.Insert(place1 - 1, player1);
-                        position = position.Insert(place2, player2);
+                        if (topplat1 == true)
+                        {
+                            positiontop = positiontop.Remove(place1 - 1, 1);
+                            positiontop = positiontop.Insert(place1 - 1, player1);
+                        }
+                        else if (topplat1 == false)
+                        {
+                            positionlow = positionlow.Remove(place1 - 1, 1);
+                            positionlow = positionlow.Insert(place1 - 1, player1);
+                        }
+                        if (topplat2 == true)
+                        {
+                            positiontop = positiontop.Remove(place2, 1);
+                            positiontop = positiontop.Insert(place2, player2);
+                        }
+                        else if (topplat2 == false)
+                        {
+                            positionlow = positionlow.Remove(place2, 1);
+                            positionlow = positionlow.Insert(place2, player2);
+                        }
                     }
-                    Console.WriteLine(position);
+                    Console.WriteLine(positiontop + "\n" + positionlow);
                     if (health2 <= 0 || health1 <= 0)
                     {
                         Thread.Sleep(1); // это чтоб пикнуло когда игрок умрет, иначе если зажать клавишу и убить игрока, оно не пикнет
@@ -516,6 +613,8 @@ namespace MortalKombat
                         ltime2 = 0;
                         sitting1 = false;
                         sitting2 = false;
+                        topplat1 = false;
+                        topplat2 = false;
                         Console.WriteLine("Всё сброшено по-умолчанию у обоих игроков");
                     }
                     Console.ForegroundColor = ConsoleColor.White;
@@ -578,6 +677,10 @@ namespace MortalKombat
                     Console.WriteLine(health2 + "хп");
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.WriteLine("1 игрок стоит на " + place1 + "клетке, второй игрок на " + place2 + "клетке");
+                    if (topplat1 != topplat2)
+                        Console.WriteLine("Игроки стоят на разных платформах");
+                    else if (topplat1 == topplat2)
+                        Console.WriteLine("Игроки стоят на одной платформе");
                     if (sitting1 == sitting2)
                         Console.WriteLine("Игроки в одном положении");
                     else if (sitting1 != sitting2)
@@ -593,7 +696,8 @@ namespace MortalKombat
                     else if (fltime1 == 1)
                         Console.WriteLine("Игрок 2 готов сделать чистый блок");
                     Console.ForegroundColor = ConsoleColor.White;
-                    position = " ________";
+                    positiontop = " __________";
+                    positionlow = positiontop;
                     if (sitting1 == false)
                         player1 = "↑";
                     else if (sitting1 == true)
@@ -602,17 +706,53 @@ namespace MortalKombat
                         player2 = "▲";
                     else if (sitting2 == true)
                         player2 = "▼";
-                    if (place2 > place1)
+                    if (place2 > place1 || place2 == place1)
                     {
-                        position = position.Insert(place1, player1);
-                        position = position.Insert(place2, player2);
+                        if (topplat1 == true)
+                        {
+                            positiontop = positiontop.Remove(place1, 1);
+                            positiontop = positiontop.Insert(place1, player1);
+                        }
+                        else if (topplat1 == false)
+                        {
+                            positionlow = positionlow.Remove(place1, 1);
+                            positionlow = positionlow.Insert(place1, player1);
+                        }
+                        if (topplat2 == true)
+                        {
+                            positiontop = positiontop.Remove(place2, 1);
+                            positiontop = positiontop.Insert(place2, player2);
+                        }
+                        else if (topplat2 == false)
+                        {
+                            positionlow = positionlow.Remove(place2, 1);
+                            positionlow = positionlow.Insert(place2, player2);
+                        }
                     }
                     else if (place1 > place2)
                     {
-                        position = position.Insert(place1 - 1, player1);
-                        position = position.Insert(place2, player2);
+                        if (topplat1 == true)
+                        {
+                            positiontop = positiontop.Remove(place1 - 1, 1);
+                            positiontop = positiontop.Insert(place1 - 1, player1);
+                        }
+                        else if (topplat1 == false)
+                        {
+                            positionlow = positionlow.Remove(place1 - 1, 1);
+                            positionlow = positionlow.Insert(place1 - 1, player1);
+                        }
+                        if (topplat2 == true)
+                        {
+                            positiontop = positiontop.Remove(place2, 1);
+                            positiontop = positiontop.Insert(place2, player2);
+                        }
+                        else if (topplat2 == false)
+                        {
+                            positionlow = positionlow.Remove(place2, 1);
+                            positionlow = positionlow.Insert(place2, player2);
+                        }
                     }
-                    Console.WriteLine(position);
+                    Console.WriteLine(positiontop + "\n" + positionlow);
                     if (health2 <= 0 || health1 <= 0)
                     {
                         Thread.Sleep(1); // это чтоб пикнуло когда игрок умрет, иначе если зажать клавишу и убить игрока, оно не пикнет
@@ -639,6 +779,8 @@ namespace MortalKombat
                         ltime2 = 0;
                         sitting1 = false;
                         sitting2 = false;
+                        topplat1 = false;
+                        topplat2 = false;
                         Console.WriteLine("Всё сброшено по-умолчанию у обоих игроков");
                     }
                     Console.ForegroundColor = ConsoleColor.White;
@@ -834,6 +976,14 @@ namespace MortalKombat
                     Console.WriteLine("Игрок 1 присел");
                 }
                 stopwatch5.Start();
+                if (ts5.Milliseconds > 0 & ts5.Milliseconds < 300 & ts5.Seconds == 0)
+                {
+                    if (topplat1 == true)
+                    {
+                        topplat1 = false;
+                        Console.WriteLine("Игрок 1 слез с платформы");
+                    }
+                }
             }
         }
         public static void down2() // присесть за 2 игрока
@@ -846,6 +996,14 @@ namespace MortalKombat
                     Console.WriteLine("Игрок 2 присел");
                 }
                 stopwatch7.Start();
+                if (ts7.Milliseconds > 0 & ts7.Milliseconds < 300 & ts7.Seconds == 0)
+                {
+                    if (topplat2 == true)
+                    {
+                        topplat2 = false;
+                        Console.WriteLine("Игрок 2 слез с платформы");
+                    }
+                }
             }
         }
         public static void left1() // налево за 1 игрока
@@ -856,13 +1014,20 @@ namespace MortalKombat
                 {
                     if (place1 > 1)
                     {
-                        if (place1 - place2 > 1 || place2 - place1 >= 1)
+                        if (place1 - place2 > 1 || place2 - place1 >= 1 || topplat1 != topplat2)
                         {
                             place1--;
                             if (place2 > place1)
                                 Console.WriteLine("Игрок 1 переместился на клетку назад");
                             else if (place1 > place2)
                                 Console.WriteLine("Игрок 1 переместился на клетку вперёд");
+                            if (place2 == place1 & topplat1 != topplat2)
+                            {
+                                if (place2 != 1)
+                                    place1--;
+                                else if (place2 == 1)
+                                    place1++;
+                            }
                         }
                     }
                     if (place2 > place1)
@@ -891,13 +1056,21 @@ namespace MortalKombat
                 {
                     if (place2 > 1)
                     {
-                        if (place1 - place2 >= 1 || place2 - place1 > 1)
+                        if (place1 - place2 >= 1 || place2 - place1 > 1 || topplat1 != topplat2)
                         {
                             place2--;
                             if (place2 > place1)
                                 Console.WriteLine("Игрок 2 переместился на клетку вперёд");
                             else if (place1 > place2)
                                 Console.WriteLine("Игрок 2 переместился на клетку назад");
+                            if (place2 == place1 & topplat1 != topplat2)
+                                if (place2 == place1 & topplat1 != topplat2)
+                                {
+                                    if (place1 != 1)
+                                        place2--;
+                                    else if (place1 == 1)
+                                        place2++;
+                                }
                         }
                     }
                     if (place2 > place1)
@@ -926,13 +1099,20 @@ namespace MortalKombat
                 {
                     if (place1 < 10)
                     {
-                        if (place1 - place2 >= 1 || place2 - place1 > 1)
+                        if (place1 - place2 >= 1 || place2 - place1 > 1 || topplat1 != topplat2)
                         {
                             place1++;
                             if (place2 > place1)
                                 Console.WriteLine("Игрок 1 переместился на клетку вперёд");
                             else if (place1 > place2)
                                 Console.WriteLine("Игрок 1 переместился на клетку назад");
+                            if (place2 == place1 & topplat1 != topplat2)
+                            {
+                                if (place2 != 10)
+                                    place1++;
+                                else if (place2 == 10)
+                                    place1--;
+                            }
                         }
                     }
                     if (place2 > place1)
@@ -961,13 +1141,20 @@ namespace MortalKombat
                 {
                     if (place2 < 10)
                     {
-                        if (place1 - place2 > 1 || place2 - place1 >= 1)
+                        if (place1 - place2 > 1 || place2 - place1 >= 1 || topplat1 != topplat2)
                         {
                             place2++;
                             if (place2 > place1)
                                 Console.WriteLine("Игрок 2 переместился на клетку назад");
                             else if (place1 > place2)
                                 Console.WriteLine("Игрок 2 переместился на клетку вперёд");
+                            if (place2 == place1 & topplat1 != topplat2)
+                            {
+                                if (place1 != 10)
+                                    place2++;
+                                else if (place1 == 10)
+                                    place2--;
+                            }
                         }
                     }
                     if (place2 > place1)
@@ -997,6 +1184,14 @@ namespace MortalKombat
                     sitting1 = false;
                     Console.WriteLine("Игрок 1 встал");
                 }
+                else if (sitting1 == false)
+                {
+                    if (topplat1 == false)
+                    {
+                        topplat1 = true;
+                        Console.WriteLine("Игрок 1 залез на верхнюю платформу");
+                    }
+                }
             }
         }
         public static void up2() // наверх за 2 игрока
@@ -1008,9 +1203,17 @@ namespace MortalKombat
                     sitting2 = false;
                     Console.WriteLine("Игрок 2 встал");
                 }
+                else if (sitting2 == false)
+                {
+                    if (topplat2 == false)
+                    {
+                        topplat2 = true;
+                        Console.WriteLine("Игрок 2 залез на верхнюю платформу");
+                    }
+                }
             }
         }
-        public static void buttonJ() // если нажал на J (для спецприёмов)
+        public static void buttonJ() // если нажал на J (для спецприёма Гарпун)
         {
             if (ts2.Milliseconds < 300 & ts2.Milliseconds > 0 & ts2.Seconds == 0)
             {
@@ -1039,7 +1242,7 @@ namespace MortalKombat
                 }
             }
         }
-        public static void buttonI() // если нажал на I (для спецприёмов)
+        public static void buttonI() // если нажал на I (для спецприёма Выстрел Из Арбалета)
         {
             if (ts2.Milliseconds < 300 & ts2.Milliseconds > 0 & ts2.Seconds == 0)
             {
@@ -1065,7 +1268,7 @@ namespace MortalKombat
                 }
             }
         }
-        public static void buttonK() // если нажал на K (для спецприёмов)
+        public static void buttonK() // если нажал на K (для спецприёма Телепорт)
         {
             if (ts6.Milliseconds < 300 & ts6.Milliseconds > 0 & ts6.Seconds == 0)
             {
@@ -1103,7 +1306,7 @@ namespace MortalKombat
                 }
             }
         }
-        public static void button4() // если нажал на 4 (для спецприёмов)
+        public static void button4() // если нажал на 4 (для спецприёма Гарпун)
         {
             if (ts4.Milliseconds < 300 & ts4.Milliseconds > 0 & ts4.Seconds == 0)
             {
@@ -1137,7 +1340,7 @@ namespace MortalKombat
                 }
             }
         }
-        public static void button1() // если нажал на 1 (для спецприёмов)
+        public static void button1() // если нажал на 1 (для спецприёма Выстрел Из Арбалета)
         {
             if (ts4.Milliseconds < 300 & ts4.Milliseconds > 0 & ts4.Seconds == 0)
             {
@@ -1168,7 +1371,7 @@ namespace MortalKombat
                 }
             }
         }
-        public static void button2() // если нажал на 2 (для спецприёмов)
+        public static void button2() // если нажал на 2 (для спецприёма Телепорт)
         {
             if (ts8.Milliseconds < 300 & ts8.Milliseconds > 0 & ts8.Seconds == 0)
             {
