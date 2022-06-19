@@ -462,34 +462,37 @@ namespace MortalKombat
                 if (pause == false)
                 {
                     Console.WriteLine("4");
-                    if (place2 - place1 == 1)
+                    if (topplat1 == topplat2)
                     {
-                        if (sitting1 == sitting2)
+                        if (place2 - place1 == 1 || place1 - place2 == 1)
                         {
-                            if (fltime2 == 1)
+                            if (sitting1 == sitting2)
                             {
-                                ltime2 = 2;
-                                Console.WriteLine("Игрок 1 отбил атаку чистым блоком");
+                                if (fltime2 == 1)
+                                {
+                                    ltime2 = 2;
+                                    Console.WriteLine("Игрок 1 отбил атаку чистым блоком");
+                                }
                             }
-                        }
-                        else if (sitting1 != sitting2)
-                        {
-                            if (fltime2 == 1)
+                            else if (sitting1 != sitting2)
                             {
-                                Console.WriteLine("Игрок 1 не туда поставил чистый блок");
+                                if (fltime2 == 1)
+                                {
+                                    Console.WriteLine("Игрок 1 не туда поставил чистый блок");
+                                }
                             }
-                        }
-                        if (ltime2 == 0)
-                        {
-                            if (block1 == false)
+                            if (ltime2 == 0)
                             {
-                                health1 -= 10;
-                                Console.WriteLine("Игрок 1 получил урон");
-                            }
-                            else if (block1 == true)
-                            {
-                                health1 -= 0.5;
-                                Console.WriteLine("Игрок 1 заблокировал удар");
+                                if (block1 == false)
+                                {
+                                    health1 -= 10;
+                                    Console.WriteLine("Игрок 1 получил урон");
+                                }
+                                else if (block1 == true)
+                                {
+                                    health1 -= 0.5;
+                                    Console.WriteLine("Игрок 1 заблокировал удар");
+                                }
                             }
                         }
                     }
@@ -540,7 +543,7 @@ namespace MortalKombat
                         player2 = "▲";
                     else if (sitting2 == true)
                         player2 = "▼";
-                    if (place2 > place1 || place2 == place1)
+                    if (place2 > place1)
                     {
                         if (topplat1 == true)
                         {
@@ -567,13 +570,13 @@ namespace MortalKombat
                     {
                         if (topplat1 == true)
                         {
-                            positiontop = positiontop.Remove(place1 - 1, 1);
-                            positiontop = positiontop.Insert(place1 - 1, player1);
+                            positiontop = positiontop.Remove(place1, 1);
+                            positiontop = positiontop.Insert(place1, player1);
                         }
                         else if (topplat1 == false)
                         {
-                            positionlow = positionlow.Remove(place1 - 1, 1);
-                            positionlow = positionlow.Insert(place1 - 1, player1);
+                            positionlow = positionlow.Remove(place1, 1);
+                            positionlow = positionlow.Insert(place1, player1);
                         }
                         if (topplat2 == true)
                         {
@@ -628,34 +631,37 @@ namespace MortalKombat
                 if (pause == false)
                 {
                     Console.WriteLine("J");
-                    if (place2 - place1 == 1)
+                    if (topplat1 == topplat2)
                     {
-                        if (sitting1 == sitting2)
+                        if (place2 - place1 == 1 || place1 - place2 == 1)
                         {
-                            if (fltime1 == 1)
+                            if (sitting1 == sitting2)
                             {
-                                ltime1 = 2;
-                                Console.WriteLine("Игрок 2 отбил атаку чистым блоком");
+                                if (fltime1 == 1)
+                                {
+                                    ltime1 = 2;
+                                    Console.WriteLine("Игрок 2 отбил атаку чистым блоком");
+                                }
                             }
-                        }
-                        else if (sitting1 != sitting2)
-                        {
-                            if (fltime1 == 1)
+                            else if (sitting1 != sitting2)
                             {
-                                Console.WriteLine("Игрок 2 не туда поставил чистый блок");
+                                if (fltime1 == 1)
+                                {
+                                    Console.WriteLine("Игрок 2 не туда поставил чистый блок");
+                                }
                             }
-                        }
-                        if (ltime1 == 0)
-                        {
-                            if (block2 == false)
+                            if (ltime1 == 0)
                             {
-                                health2 -= 10;
-                                Console.WriteLine("Игрок 2 получил урон");
-                            }
-                            else if (block2 == true)
-                            {
-                                health2 -= 0.5;
-                                Console.WriteLine("Игрок 2 заблокировал удар");
+                                if (block2 == false)
+                                {
+                                    health2 -= 10;
+                                    Console.WriteLine("Игрок 2 получил урон");
+                                }
+                                else if (block2 == true)
+                                {
+                                    health2 -= 0.5;
+                                    Console.WriteLine("Игрок 2 заблокировал удар");
+                                }
                             }
                         }
                     }
@@ -706,7 +712,7 @@ namespace MortalKombat
                         player2 = "▲";
                     else if (sitting2 == true)
                         player2 = "▼";
-                    if (place2 > place1 || place2 == place1)
+                    if (place2 > place1)
                     {
                         if (topplat1 == true)
                         {
@@ -733,13 +739,13 @@ namespace MortalKombat
                     {
                         if (topplat1 == true)
                         {
-                            positiontop = positiontop.Remove(place1 - 1, 1);
-                            positiontop = positiontop.Insert(place1 - 1, player1);
+                            positiontop = positiontop.Remove(place1, 1);
+                            positiontop = positiontop.Insert(place1, player1);
                         }
                         else if (topplat1 == false)
                         {
-                            positionlow = positionlow.Remove(place1 - 1, 1);
-                            positionlow = positionlow.Insert(place1 - 1, player1);
+                            positionlow = positionlow.Remove(place1, 1);
+                            positionlow = positionlow.Insert(place1, player1);
                         }
                         if (topplat2 == true)
                         {
