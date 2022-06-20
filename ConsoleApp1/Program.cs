@@ -844,7 +844,7 @@ namespace MortalKombat
         }
         public static void striker1() // удар 1 игрока
         {
-            if (ts2.Milliseconds > 299 || ts2.Seconds > 0 || ts2.Milliseconds == 0)
+            if (ts2.Milliseconds > 299 || ts2.Seconds > 0 || ts2.Milliseconds == 0 & ts6.Milliseconds > 299 || ts6.Seconds > 0 || ts6.Milliseconds == 0)
             {
                 if (place2 - place1 == 1 || place1 - place2 == 1)
                 {
@@ -881,7 +881,7 @@ namespace MortalKombat
         }
         public static void striker2() // удар 2 игрока
         {
-            if (ts4.Milliseconds > 299 || ts4.Seconds > 0 || ts4.Milliseconds == 0)
+            if (ts4.Milliseconds > 299 || ts4.Seconds > 0 || ts4.Milliseconds == 0 & ts8.Milliseconds > 299 || ts8.Seconds > 0 || ts8.Milliseconds == 0)
             {
                 if (place2 - place1 == 1 || place1 - place2 == 1)
                 {
