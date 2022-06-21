@@ -27,7 +27,7 @@ namespace MortalKombat
         static string positiontop; // верхнее поле боя 
         static string positionlow; // нижнее поле боя 
         static bool topplat1 = false; // верхняя или нижняя платформа у 1 игрока
-        static bool topplat2 = false; // верхняя или нижняя платформа у 1 игрока
+        static bool topplat2 = false; // верхняя или нижняя платформа у 2 игрока
         static ConsoleKeyInfo hit; // ReadKey
         static Stopwatch stopwatch1 = new Stopwatch();
         static Stopwatch stopwatch2 = new Stopwatch();
@@ -91,124 +91,12 @@ namespace MortalKombat
                     fltime2--;
                 if (pause == false)
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.Write("1 игрок: ");
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write(health1 + "хп, ");
-                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.Write("второй игрок: ");
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine(health2 + "хп");
-                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.WriteLine("1 игрок стоит на " + place1 + "клетке, второй игрок на " + place2 + "клетке");
-                    if (topplat1 != topplat2)
-                        Console.WriteLine("Игроки стоят на разных платформах");
-                    else if (topplat1 == topplat2)
-                        Console.WriteLine("Игроки стоят на одной платформе");
-                    if (sitting1 == sitting2)
-                        Console.WriteLine("Игроки в одном положении");
-                    else if (sitting1 != sitting2)
-                        Console.WriteLine("Игроки в разных положениях");
-                    if (block1 == true & block2 == true)
-                        Console.WriteLine("Игрок 1 держит блок, Игрок 2 держит блок");
-                    else if (block1 == true & block2 == false)
-                        Console.WriteLine("Игрок 1 держит блок");
-                    else if (block2 == true & block1 == false)
-                        Console.WriteLine("Игрок 2 держит блок");
-                    if (fltime2 == 1)
-                        Console.WriteLine("Игрок 1 готов сделать чистый блок");
-                    else if (fltime1 == 1)
-                        Console.WriteLine("Игрок 2 готов сделать чистый блок");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    positiontop = " __________";
-                    positionlow = positiontop;
-                    if (sitting1 == false)
-                        player1 = "↑";
-                    else if (sitting1 == true)
-                        player1 = "↓";
-                    if (sitting2 == false)
-                        player2 = "▲";
-                    else if (sitting2 == true)
-                        player2 = "▼";
-                    if (place2 > place1)
-                    {
-                        if (topplat1 == true)
-                        {
-                            positiontop = positiontop.Remove(place1, 1);
-                            positiontop = positiontop.Insert(place1, player1);
-                        }
-                        else if (topplat1 == false)
-                        {
-                            positionlow = positionlow.Remove(place1, 1);
-                            positionlow = positionlow.Insert(place1, player1);
-                        }
-                        if (topplat2 == true)
-                        {
-                            positiontop = positiontop.Remove(place2, 1);
-                            positiontop = positiontop.Insert(place2, player2);
-                        }
-                        else if (topplat2 == false)
-                        {
-                            positionlow = positionlow.Remove(place2, 1);
-                            positionlow = positionlow.Insert(place2, player2);
-                        }
-                    }
-                    else if (place1 > place2)
-                    {
-                        if (topplat1 == true)
-                        {
-                            positiontop = positiontop.Remove(place1, 1);
-                            positiontop = positiontop.Insert(place1, player1);
-                        }
-                        else if (topplat1 == false)
-                        {
-                            positionlow = positionlow.Remove(place1, 1);
-                            positionlow = positionlow.Insert(place1, player1);
-                        }
-                        if (topplat2 == true)
-                        {
-                            positiontop = positiontop.Remove(place2, 1);
-                            positiontop = positiontop.Insert(place2, player2);
-                        }
-                        else if (topplat2 == false)
-                        {
-                            positionlow = positionlow.Remove(place2, 1);
-                            positionlow = positionlow.Insert(place2, player2);
-                        }
-                    }
-                    Console.WriteLine(positiontop + "\n" + positionlow);
+                    menu();
                 }
                 if(health2 <= 0 || health1 <= 0)
                 {
-                    Thread.Sleep(1); // это чтоб пикнуло когда игрок умрет, иначе если зажать клавишу и убить игрока, оно не пикнет
-                    if (health2 <= 0)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.WriteLine("Игрок 2 проиграл");
-                    }
-                    if (health1 <= 0)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Игрок 1 проиграл");
-                    }
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    health1 = 1000;
-                    health2 = 1000;
-                    block1 = false;
-                    block2 = false;
-                    place1 = 4;
-                    place2 = 7;
-                    fltime1 = 0;
-                    fltime2 = 0;
-                    ltime1 = 0;
-                    ltime2 = 0;
-                    sitting1 = false;
-                    sitting2 = false;
-                    topplat1 = false;
-                    topplat2 = false;
-                    Console.WriteLine("Всё сброшено по-умолчанию у обоих игроков");
+                    loser();
                 }
-                Console.ForegroundColor = ConsoleColor.White;
                 while (Console.KeyAvailable)
                     Console.ReadKey(true);
                 hit = Console.ReadKey(true);
@@ -504,123 +392,11 @@ namespace MortalKombat
                         fltime1--;
                     if (fltime2 > 0)
                         fltime2--;
-                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.Write("1 игрок: ");
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write(health1 + "хп, ");
-                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.Write("второй игрок: ");
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine(health2 + "хп");
-                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.WriteLine("1 игрок стоит на " + place1 + "клетке, второй игрок на " + place2 + "клетке");
-                    if (topplat1 != topplat2)
-                        Console.WriteLine("Игроки стоят на разных платформах");
-                    else if (topplat1 == topplat2)
-                        Console.WriteLine("Игроки стоят на одной платформе");
-                    if (sitting1 == sitting2)
-                        Console.WriteLine("Игроки в одном положении");
-                    else if (sitting1 != sitting2)
-                        Console.WriteLine("Игроки в разных положениях");
-                    if (block1 == true & block2 == true)
-                        Console.WriteLine("Игрок 1 держит блок, Игрок 2 держит блок");
-                    else if (block1 == true & block2 == false)
-                        Console.WriteLine("Игрок 1 держит блок");
-                    else if (block2 == true & block1 == false)
-                        Console.WriteLine("Игрок 2 держит блок");
-                    if (fltime2 == 1)
-                        Console.WriteLine("Игрок 1 готов сделать чистый блок");
-                    else if (fltime1 == 1)
-                        Console.WriteLine("Игрок 2 готов сделать чистый блок");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    positiontop = " __________";
-                    positionlow = positiontop;
-                    if (sitting1 == false)
-                        player1 = "↑";
-                    else if (sitting1 == true)
-                        player1 = "↓";
-                    if (sitting2 == false)
-                        player2 = "▲";
-                    else if (sitting2 == true)
-                        player2 = "▼";
-                    if (place2 > place1)
-                    {
-                        if (topplat1 == true)
-                        {
-                            positiontop = positiontop.Remove(place1, 1);
-                            positiontop = positiontop.Insert(place1, player1);
-                        }
-                        else if (topplat1 == false)
-                        {
-                            positionlow = positionlow.Remove(place1, 1);
-                            positionlow = positionlow.Insert(place1, player1);
-                        }
-                        if (topplat2 == true)
-                        {
-                            positiontop = positiontop.Remove(place2, 1);
-                            positiontop = positiontop.Insert(place2, player2);
-                        }
-                        else if (topplat2 == false)
-                        {
-                            positionlow = positionlow.Remove(place2, 1);
-                            positionlow = positionlow.Insert(place2, player2);
-                        }
-                    }
-                    else if (place1 > place2)
-                    {
-                        if (topplat1 == true)
-                        {
-                            positiontop = positiontop.Remove(place1, 1);
-                            positiontop = positiontop.Insert(place1, player1);
-                        }
-                        else if (topplat1 == false)
-                        {
-                            positionlow = positionlow.Remove(place1, 1);
-                            positionlow = positionlow.Insert(place1, player1);
-                        }
-                        if (topplat2 == true)
-                        {
-                            positiontop = positiontop.Remove(place2, 1);
-                            positiontop = positiontop.Insert(place2, player2);
-                        }
-                        else if (topplat2 == false)
-                        {
-                            positionlow = positionlow.Remove(place2, 1);
-                            positionlow = positionlow.Insert(place2, player2);
-                        }
-                    }
-                    Console.WriteLine(positiontop + "\n" + positionlow);
+                    menu();
                     if (health2 <= 0 || health1 <= 0)
                     {
-                        Thread.Sleep(1); // это чтоб пикнуло когда игрок умрет, иначе если зажать клавишу и убить игрока, оно не пикнет
-                        if (health2 <= 0)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Blue;
-                            Console.WriteLine("Игрок 2 проиграл");
-                        }
-                        if (health1 <= 0)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Игрок 1 проиграл");
-                        }
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        health1 = 1000;
-                        health2 = 1000;
-                        block1 = false;
-                        block2 = false;
-                        place1 = 4;
-                        place2 = 7;
-                        fltime1 = 0;
-                        fltime2 = 0;
-                        ltime1 = 0;
-                        ltime2 = 0;
-                        sitting1 = false;
-                        sitting2 = false;
-                        topplat1 = false;
-                        topplat2 = false;
-                        Console.WriteLine("Всё сброшено по-умолчанию у обоих игроков");
+                        loser();
                     }
-                    Console.ForegroundColor = ConsoleColor.White;
                 }
             }
         }
@@ -673,123 +449,11 @@ namespace MortalKombat
                         fltime1--;
                     if (fltime2 > 0)
                         fltime2--;
-                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.Write("1 игрок: ");
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write(health1 + "хп, ");
-                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.Write("второй игрок: ");
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine(health2 + "хп");
-                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.WriteLine("1 игрок стоит на " + place1 + "клетке, второй игрок на " + place2 + "клетке");
-                    if (topplat1 != topplat2)
-                        Console.WriteLine("Игроки стоят на разных платформах");
-                    else if (topplat1 == topplat2)
-                        Console.WriteLine("Игроки стоят на одной платформе");
-                    if (sitting1 == sitting2)
-                        Console.WriteLine("Игроки в одном положении");
-                    else if (sitting1 != sitting2)
-                        Console.WriteLine("Игроки в разных положениях");
-                    if (block1 == true & block2 == true)
-                        Console.WriteLine("Игрок 1 держит блок, Игрок 2 держит блок");
-                    else if (block1 == true & block2 == false)
-                        Console.WriteLine("Игрок 1 держит блок");
-                    else if (block2 == true & block1 == false)
-                        Console.WriteLine("Игрок 2 держит блок");
-                    if (fltime2 == 1)
-                        Console.WriteLine("Игрок 1 готов сделать чистый блок");
-                    else if (fltime1 == 1)
-                        Console.WriteLine("Игрок 2 готов сделать чистый блок");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    positiontop = " __________";
-                    positionlow = positiontop;
-                    if (sitting1 == false)
-                        player1 = "↑";
-                    else if (sitting1 == true)
-                        player1 = "↓";
-                    if (sitting2 == false)
-                        player2 = "▲";
-                    else if (sitting2 == true)
-                        player2 = "▼";
-                    if (place2 > place1)
-                    {
-                        if (topplat1 == true)
-                        {
-                            positiontop = positiontop.Remove(place1, 1);
-                            positiontop = positiontop.Insert(place1, player1);
-                        }
-                        else if (topplat1 == false)
-                        {
-                            positionlow = positionlow.Remove(place1, 1);
-                            positionlow = positionlow.Insert(place1, player1);
-                        }
-                        if (topplat2 == true)
-                        {
-                            positiontop = positiontop.Remove(place2, 1);
-                            positiontop = positiontop.Insert(place2, player2);
-                        }
-                        else if (topplat2 == false)
-                        {
-                            positionlow = positionlow.Remove(place2, 1);
-                            positionlow = positionlow.Insert(place2, player2);
-                        }
-                    }
-                    else if (place1 > place2)
-                    {
-                        if (topplat1 == true)
-                        {
-                            positiontop = positiontop.Remove(place1, 1);
-                            positiontop = positiontop.Insert(place1, player1);
-                        }
-                        else if (topplat1 == false)
-                        {
-                            positionlow = positionlow.Remove(place1, 1);
-                            positionlow = positionlow.Insert(place1, player1);
-                        }
-                        if (topplat2 == true)
-                        {
-                            positiontop = positiontop.Remove(place2, 1);
-                            positiontop = positiontop.Insert(place2, player2);
-                        }
-                        else if (topplat2 == false)
-                        {
-                            positionlow = positionlow.Remove(place2, 1);
-                            positionlow = positionlow.Insert(place2, player2);
-                        }
-                    }
-                    Console.WriteLine(positiontop + "\n" + positionlow);
+                    menu();
                     if (health2 <= 0 || health1 <= 0)
                     {
-                        Thread.Sleep(1); // это чтоб пикнуло когда игрок умрет, иначе если зажать клавишу и убить игрока, оно не пикнет
-                        if (health2 <= 0)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Blue;
-                            Console.WriteLine("Игрок 2 проиграл");
-                        }
-                        if (health1 <= 0)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Игрок 1 проиграл");
-                        }
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        health1 = 1000;
-                        health2 = 1000;
-                        block1 = false;
-                        block2 = false;
-                        place1 = 4;
-                        place2 = 7;
-                        fltime1 = 0;
-                        fltime2 = 0;
-                        ltime1 = 0;
-                        ltime2 = 0;
-                        sitting1 = false;
-                        sitting2 = false;
-                        topplat1 = false;
-                        topplat2 = false;
-                        Console.WriteLine("Всё сброшено по-умолчанию у обоих игроков");
+                        loser();
                     }
-                    Console.ForegroundColor = ConsoleColor.White;
                 }
             }
         }
@@ -1414,6 +1078,126 @@ namespace MortalKombat
                     }
                 }
             }
+        }
+        public static void menu() // меню
+        {
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.Write("1 игрок: ");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(health1 + "хп, ");
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.Write("второй игрок: ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(health2 + "хп");
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine("1 игрок стоит на " + place1 + "клетке, второй игрок на " + place2 + "клетке");
+            if (topplat1 != topplat2)
+                Console.WriteLine("Игроки стоят на разных платформах");
+            else if (topplat1 == topplat2)
+                Console.WriteLine("Игроки стоят на одной платформе");
+            if (sitting1 == sitting2)
+                Console.WriteLine("Игроки в одном положении");
+            else if (sitting1 != sitting2)
+                Console.WriteLine("Игроки в разных положениях");
+            if (block1 == true & block2 == true)
+                Console.WriteLine("Игрок 1 держит блок, Игрок 2 держит блок");
+            else if (block1 == true & block2 == false)
+                Console.WriteLine("Игрок 1 держит блок");
+            else if (block2 == true & block1 == false)
+                Console.WriteLine("Игрок 2 держит блок");
+            if (fltime2 == 1)
+                Console.WriteLine("Игрок 1 готов сделать чистый блок");
+            else if (fltime1 == 1)
+                Console.WriteLine("Игрок 2 готов сделать чистый блок");
+            Console.ForegroundColor = ConsoleColor.White;
+            positiontop = " __________";
+            positionlow = positiontop;
+            if (sitting1 == false)
+                player1 = "↑";
+            else if (sitting1 == true)
+                player1 = "↓";
+            if (sitting2 == false)
+                player2 = "▲";
+            else if (sitting2 == true)
+                player2 = "▼";
+            if (place2 > place1)
+            {
+                if (topplat1 == true)
+                {
+                    positiontop = positiontop.Remove(place1, 1);
+                    positiontop = positiontop.Insert(place1, player1);
+                }
+                else if (topplat1 == false)
+                {
+                    positionlow = positionlow.Remove(place1, 1);
+                    positionlow = positionlow.Insert(place1, player1);
+                }
+                if (topplat2 == true)
+                {
+                    positiontop = positiontop.Remove(place2, 1);
+                    positiontop = positiontop.Insert(place2, player2);
+                }
+                else if (topplat2 == false)
+                {
+                    positionlow = positionlow.Remove(place2, 1);
+                    positionlow = positionlow.Insert(place2, player2);
+                }
+            }
+            else if (place1 > place2)
+            {
+                if (topplat1 == true)
+                {
+                    positiontop = positiontop.Remove(place1, 1);
+                    positiontop = positiontop.Insert(place1, player1);
+                }
+                else if (topplat1 == false)
+                {
+                    positionlow = positionlow.Remove(place1, 1);
+                    positionlow = positionlow.Insert(place1, player1);
+                }
+                if (topplat2 == true)
+                {
+                    positiontop = positiontop.Remove(place2, 1);
+                    positiontop = positiontop.Insert(place2, player2);
+                }
+                else if (topplat2 == false)
+                {
+                    positionlow = positionlow.Remove(place2, 1);
+                    positionlow = positionlow.Insert(place2, player2);
+                }
+            }
+            Console.WriteLine(positiontop + "\n" + positionlow);
+        }
+        public static void loser() // если кто-то проиграл
+        {
+            Thread.Sleep(1); // это чтоб пикнуло когда игрок умрет, иначе если зажать клавишу и убить игрока, оно не пикнет
+            if (health2 <= 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("Игрок 2 проиграл");
+            }
+            if (health1 <= 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Игрок 1 проиграл");
+            }
+            Console.ForegroundColor = ConsoleColor.Green;
+            health1 = 1000;
+            health2 = 1000;
+            block1 = false;
+            block2 = false;
+            place1 = 4;
+            place2 = 7;
+            fltime1 = 0;
+            fltime2 = 0;
+            ltime1 = 0;
+            ltime2 = 0;
+            sitting1 = false;
+            sitting2 = false;
+            topplat1 = false;
+            topplat2 = false;
+            Console.WriteLine("Всё сброшено по-умолчанию у обоих игроков");
+            menu();
         }
     }
 }
