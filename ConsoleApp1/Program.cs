@@ -6,47 +6,47 @@ namespace MortalKombat
 {
     class Program
     {
-        static bool block1 = false; // наличие блока 1 игрока
-        static bool block2 = false; // наличие блока 2 игрока
-        static double health1 = 1000; // хп 1 игрока
-        static double health2 = 1000; // хп 2 игрока
-        static bool pause = false; // наличие паузы
-        static int ltime1 = 0; // потерянное время 1 игрока
-        static int ltime2 = 0; // потерянное время 2 игрока
-        static int fltime1 = 0; // возможная потеря времени 1 игрока
-        static int fltime2 = 0; // возможная потеря времени 2 игрока
-        static bool sitting1 = false; // сидит ли 1 игрок
-        static bool sitting2 = false; // сидит ли 2 игрок
-        static bool aifighting1 = false; // включён ли ИИ за 1 игрока против 2 игрока
-        static bool aifighting2 = false; // включён ли ИИ за 2 игрока против 1 игрока
-        static int place1 = 4; // местонахождение 1 игрока
-        static int place2 = 7; // местонахождение 2 игрока
-        static int time; // для отсчета после паузы
-        static string player1; // для модельки перса 1 игрока
-        static string player2; // для модельки перса 2 игрока
-        static string positiontop; // верхнее поле боя 
-        static string positionlow; // нижнее поле боя 
-        static bool topplat1 = false; // верхняя или нижняя платформа у 1 игрока
-        static bool topplat2 = false; // верхняя или нижняя платформа у 2 игрока
-        static ConsoleKeyInfo hit; // ReadKey
-        static Stopwatch stopwatch1 = new Stopwatch();
-        static Stopwatch stopwatch2 = new Stopwatch();
-        static Stopwatch stopwatch3 = new Stopwatch();
-        static Stopwatch stopwatch4 = new Stopwatch();
-        static Stopwatch stopwatch5 = new Stopwatch();
-        static Stopwatch stopwatch6 = new Stopwatch();
-        static Stopwatch stopwatch7 = new Stopwatch();
-        static Stopwatch stopwatch8 = new Stopwatch();
-        static TimeSpan ts1 = stopwatch1.Elapsed;
-        static TimeSpan ts2 = stopwatch2.Elapsed;
-        static TimeSpan ts3 = stopwatch3.Elapsed;
-        static TimeSpan ts4 = stopwatch4.Elapsed;
-        static TimeSpan ts5 = stopwatch5.Elapsed;
-        static TimeSpan ts6 = stopwatch6.Elapsed;
-        static TimeSpan ts7 = stopwatch7.Elapsed;
-        static TimeSpan ts8 = stopwatch8.Elapsed;
+        private static bool block1 = false; // наличие блока 1 игрока
+        private static bool block2 = false; // наличие блока 2 игрока
+        private static double health1 = 1000; // хп 1 игрока
+        private static double health2 = 1000; // хп 2 игрока
+        private static bool pause = false; // наличие паузы
+        private static int ltime1 = 0; // потерянное время 1 игрока
+        private static int ltime2 = 0; // потерянное время 2 игрока
+        private static int fltime1 = 0; // возможная потеря времени 1 игрока
+        private static int fltime2 = 0; // возможная потеря времени 2 игрока
+        private static bool sitting1 = false; // сидит ли 1 игрок
+        private static bool sitting2 = false; // сидит ли 2 игрок
+        private static bool aifighting1 = false; // включён ли ИИ за 1 игрока против 2 игрока
+        private static bool aifighting2 = false; // включён ли ИИ за 2 игрока против 1 игрока
+        private static int place1 = 4; // местонахождение 1 игрока
+        private static int place2 = 7; // местонахождение 2 игрока
+        private static int time; // для отсчета после паузы
+        private static string player1; // для модельки перса 1 игрока
+        private static string player2; // для модельки перса 2 игрока
+        private static string positiontop; // верхнее поле боя 
+        private static string positionlow; // нижнее поле боя 
+        private static bool topplat1 = false; // верхняя или нижняя платформа у 1 игрока
+        private static bool topplat2 = false; // верхняя или нижняя платформа у 2 игрока
+        private static ConsoleKeyInfo hit; // ReadKey
+        private static Stopwatch stopwatch1 = new Stopwatch();
+        private static Stopwatch stopwatch2 = new Stopwatch();
+        private static Stopwatch stopwatch3 = new Stopwatch();
+        private static Stopwatch stopwatch4 = new Stopwatch();
+        private static Stopwatch stopwatch5 = new Stopwatch();
+        private static Stopwatch stopwatch6 = new Stopwatch();
+        private static Stopwatch stopwatch7 = new Stopwatch();
+        private static Stopwatch stopwatch8 = new Stopwatch();
+        private static TimeSpan ts1 = stopwatch1.Elapsed;
+        private static TimeSpan ts2 = stopwatch2.Elapsed;
+        private static TimeSpan ts3 = stopwatch3.Elapsed;
+        private static TimeSpan ts4 = stopwatch4.Elapsed;
+        private static TimeSpan ts5 = stopwatch5.Elapsed;
+        private static TimeSpan ts6 = stopwatch6.Elapsed;
+        private static TimeSpan ts7 = stopwatch7.Elapsed;
+        private static TimeSpan ts8 = stopwatch8.Elapsed;
         // таймеры для спецприёмов
-        static void Main()
+        private static void Main()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -343,7 +343,7 @@ namespace MortalKombat
                     return;
             } while (true);
         }
-        static void aifightvsone(object obj) // ИИ против 1 игрока
+        private static void aifightvsone(object obj) // ИИ против 1 игрока
         {
             if (aifighting2 == true)
             {
@@ -400,7 +400,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void aifightvstwo(object obj) // ИИ против 2 игрока
+        private static void aifightvstwo(object obj) // ИИ против 2 игрока
         {
             if (aifighting1 == true)
             {
@@ -457,7 +457,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void beeper() // отсчёт после паузы
+        private static void beeper() // отсчёт после паузы
         {
             time--;
             musicer();
@@ -482,12 +482,12 @@ namespace MortalKombat
             }
             Console.ForegroundColor = ConsoleColor.White;
         }
-        static void deather(object obj) // звук при смерти
+        private static void deather(object obj) // звук при смерти
         {
             if (health1 <= 0 || health2 <= 0)
                 Console.Beep(3000,300);
         }
-        static void musicer() // пики при отсчёте после паузы
+        private static void musicer() // пики при отсчёте после паузы
         {
             if (time == 3)
             {
@@ -506,7 +506,7 @@ namespace MortalKombat
                 Console.Beep(1000, 300);
             }
         }
-        static void striker1() // удар 1 игрока
+        private static void striker1() // удар 1 игрока
         {
             if (ts2.Milliseconds > 299 || ts2.Seconds > 0 || ts2.Milliseconds == 0 & ts6.Milliseconds > 299 || ts6.Seconds > 0 || ts6.Milliseconds == 0)
             {
@@ -543,7 +543,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void striker2() // удар 2 игрока
+        private static void striker2() // удар 2 игрока
         {
             if (ts4.Milliseconds > 299 || ts4.Seconds > 0 || ts4.Milliseconds == 0 & ts8.Milliseconds > 299 || ts8.Seconds > 0 || ts8.Milliseconds == 0)
             {
@@ -580,7 +580,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void blocker1() // блок 1 игрока
+        private static void blocker1() // блок 1 игрока
         {
             if (ltime1 == 0)
             {
@@ -596,7 +596,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void blocker2() // блок 2 игрока
+        private static void blocker2() // блок 2 игрока
         {
             if (ltime2 == 0)
             {
@@ -612,7 +612,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void cblocker1() // чистый блок 1 игрока
+        private static void cblocker1() // чистый блок 1 игрока
         {
             if (ltime1 == 0)
             {
@@ -624,7 +624,7 @@ namespace MortalKombat
                 Console.WriteLine("Игрок 1 приготовился использовать чистый блок");
             }
         }
-        static void cblocker2() // чистый блок 2 игрока
+        private static void cblocker2() // чистый блок 2 игрока
         {
             if (ltime2 == 0)
             {
@@ -636,7 +636,7 @@ namespace MortalKombat
                 Console.WriteLine("Игрок 2 приготовился использовать чистый блок");
             }
         }
-        static void down1() // присесть за 1 игрока
+        private static void down1() // присесть за 1 игрока
         {
             if (ltime1 == 0)
             {
@@ -656,7 +656,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void down2() // присесть за 2 игрока
+        private static void down2() // присесть за 2 игрока
         {
             if (ltime2 == 0)
             {
@@ -676,7 +676,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void left1() // налево за 1 игрока
+        private static void left1() // налево за 1 игрока
         {
             if (ltime1 == 0)
             {
@@ -718,7 +718,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void left2() // налево за 2 игрока
+        private static void left2() // налево за 2 игрока
         {
             if (ltime2 == 0)
             {
@@ -761,7 +761,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void right1() // направо за 1 игрока
+        private static void right1() // направо за 1 игрока
         {
             if (ltime1 == 0)
             {
@@ -803,7 +803,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void right2() // направо за 2 игрока
+        private static void right2() // направо за 2 игрока
         {
             if (ltime2 == 0)
             {
@@ -845,7 +845,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void up1() // наверх за 1 игрока
+        private static void up1() // наверх за 1 игрока
         {
             if (ltime1 == 0)
             {
@@ -864,7 +864,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void up2() // наверх за 2 игрока
+        private static void up2() // наверх за 2 игрока
         {
             if (ltime2 == 0)
             {
@@ -883,7 +883,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void buttonJ() // если нажал на J (для спецприёма Гарпун 1 игрока)
+        private static void buttonJ() // если нажал на J (для спецприёма Гарпун 1 игрока)
         {
             if (ts2.Milliseconds < 300 & ts2.Milliseconds > 0 & ts2.Seconds == 0)
             {
@@ -912,7 +912,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void buttonI() // если нажал на I (для спецприёма Выстрел Из Арбалета 1 игрока)
+        private static void buttonI() // если нажал на I (для спецприёма Выстрел Из Арбалета 1 игрока)
         {
             if (ts2.Milliseconds < 300 & ts2.Milliseconds > 0 & ts2.Seconds == 0)
             {
@@ -938,7 +938,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void buttonK() // если нажал на K (для спецприёма Телепорт 1 игрока)
+        private static void buttonK() // если нажал на K (для спецприёма Телепорт 1 игрока)
         {
             if (ts6.Milliseconds < 300 & ts6.Milliseconds > 0 & ts6.Seconds == 0)
             {
@@ -976,7 +976,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void button4() // если нажал на 4 (для спецприёма Гарпун 2 игрока)
+        private static void button4() // если нажал на 4 (для спецприёма Гарпун 2 игрока)
         {
             if (ts4.Milliseconds < 300 & ts4.Milliseconds > 0 & ts4.Seconds == 0)
             {
@@ -1010,7 +1010,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void button1() // если нажал на 1 (для спецприёма Выстрел Из Арбалета 2 игрока)
+        private static void button1() // если нажал на 1 (для спецприёма Выстрел Из Арбалета 2 игрока)
         {
             if (ts4.Milliseconds < 300 & ts4.Milliseconds > 0 & ts4.Seconds == 0)
             {
@@ -1041,7 +1041,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void button2() // если нажал на 2 (для спецприёма Телепорт 2 игрока)
+        private static void button2() // если нажал на 2 (для спецприёма Телепорт 2 игрока)
         {
             if (ts8.Milliseconds < 300 & ts8.Milliseconds > 0 & ts8.Seconds == 0)
             {
@@ -1079,7 +1079,7 @@ namespace MortalKombat
                 }
             }
         }
-        static void menu() // меню
+        private static void menu() // меню
         {
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.Write("1 игрок: ");
@@ -1168,7 +1168,7 @@ namespace MortalKombat
             }
             Console.WriteLine(positiontop + "\n" + positionlow);
         }
-        static void loser() // если кто-то проиграл
+        private static void loser() // если кто-то проиграл
         {
             Thread.Sleep(1); // это чтоб пикнуло когда игрок умрет, иначе если зажать клавишу и убить игрока, оно не пикнет
             if (health2 <= 0)
