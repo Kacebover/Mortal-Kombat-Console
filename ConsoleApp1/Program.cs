@@ -261,11 +261,11 @@ namespace MortalKombat
                         Console.Write("Игра будет возобновлена через: ");
                         time = 4;
                         beeper();
-                        Thread.Sleep(700);
+                        Thread.Sleep(1000);
                         beeper();
-                        Thread.Sleep(700);
+                        Thread.Sleep(1000);
                         beeper();
-                        Thread.Sleep(700);
+                        Thread.Sleep(1000);
                         beeper();
                     }
                 }
@@ -480,30 +480,29 @@ namespace MortalKombat
                 Console.WriteLine();
                 Console.WriteLine("Игра возобновлена");
             }
-            Console.ForegroundColor = ConsoleColor.White;
         }
         private static void deather(object obj) // звук при смерти
         {
             if (health1 <= 0 || health2 <= 0)
-                Console.Beep(3000,300);
+                Console.Beep();
         }
         private static void musicer() // пики при отсчёте после паузы
         {
             if (time == 3)
             {
-                Console.Beep(2000, 300);
+                Console.Beep();
             }
             else if (time == 2)
             {
-                Console.Beep(2000, 300);
+                Console.Beep();
             }
             else if (time == 1)
             {
-                Console.Beep(2000, 300);
+                Console.Beep();
             }
             else if (time == 0)
             {
-                Console.Beep(1000, 300);
+                Console.Beep();
             }
         }
         private static void striker1() // удар 1 игрока
