@@ -197,37 +197,31 @@ namespace MortalKombat
                     }
                     else if (hit.Key == ConsoleKey.P)
                     {
-                        if (ltime1 == 0)
-                        {
                             if (aifighting2 == false & aifighting1 == false)
                             {
                                 aifighting2 = true;
                                 Console.WriteLine("ИИ включён против 1 игрока");
                             }
-                            else if (aifighting2 == true || aifighting1 == true)
+                            else
                             {
                                 aifighting1 = false;
                                 aifighting2 = false;
                                 Console.WriteLine("ИИ выключен");
                             }
-                        }
                     }
                     else if (hit.Key == ConsoleKey.NumPad9)
                     {
-                        if (ltime2 == 0)
-                        {
                             if (aifighting1 == false & aifighting2 == false)
                             {
                                 aifighting1 = true;
                                 Console.WriteLine("ИИ включён включён против 2 игрока");
                             }
-                            else if (aifighting1 == true || aifighting2 == true)
+                            else
                             {
                                 aifighting1 = false;
                                 aifighting2 = false;
                                 Console.WriteLine("ИИ выключен");
                             }
-                        }
                     }
                     else if (hit.Key == ConsoleKey.A)
                     {
