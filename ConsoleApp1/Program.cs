@@ -1051,7 +1051,7 @@ namespace MortalKombat
                         health1 -= 10;
                         Console.WriteLine("Игрок 2 использовал спецприём Телепорт");
                     }
-                    else if (block2 == true)
+                    else if (block1 == true)
                     {
                         Console.WriteLine("Игрок 1 заблокировал телепорт");
                     }
