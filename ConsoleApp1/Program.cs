@@ -255,7 +255,7 @@ namespace MortalKombat
                         Console.WriteLine("Введите PageUp или M (англ), чтобы посмотреть управление и правила");
                         Console.WriteLine("PageDown или Tab - возобновить игру");
                     }
-                    else if (pause == true)
+                    else
                     {
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.Write("Игра будет возобновлена через: ");
@@ -362,7 +362,7 @@ namespace MortalKombat
                                     Console.WriteLine("Игрок 1 отбил атаку чистым блоком");
                                 }
                             }
-                            else if (sitting1 != sitting2)
+                            else
                             {
                                 if (fltime2 == 1)
                                 {
@@ -376,7 +376,7 @@ namespace MortalKombat
                                     health1 -= 10;
                                     Console.WriteLine("Игрок 1 получил урон");
                                 }
-                                else if (block1 == true)
+                                else
                                 {
                                     health1 -= 0.5;
                                     Console.WriteLine("Игрок 1 заблокировал удар");
@@ -419,7 +419,7 @@ namespace MortalKombat
                                     Console.WriteLine("Игрок 2 отбил атаку чистым блоком");
                                 }
                             }
-                            else if (sitting1 != sitting2)
+                            else
                             {
                                 if (fltime1 == 1)
                                 {
@@ -433,7 +433,7 @@ namespace MortalKombat
                                     health2 -= 10;
                                     Console.WriteLine("Игрок 2 получил урон");
                                 }
-                                else if (block2 == true)
+                                else
                                 {
                                     health2 -= 0.5;
                                     Console.WriteLine("Игрок 2 заблокировал удар");
@@ -507,36 +507,39 @@ namespace MortalKombat
         }
         private static void striker1() // удар 1 игрока
         {
-            if (ts2.Milliseconds > 299 || ts2.Seconds > 0 || ts2.Milliseconds == 0 & ts6.Milliseconds > 299 || ts6.Seconds > 0 || ts6.Milliseconds == 0)
+            if (ts2.Milliseconds > 299 || ts2.Seconds > 0 || ts2.Milliseconds == 0)
             {
-                if (place2 - place1 == 1 || place1 - place2 == 1)
+                if (ts6.Milliseconds > 299 || ts6.Seconds > 0 || ts6.Milliseconds == 0)
                 {
-                    if (sitting1 == sitting2)
+                    if (place2 - place1 == 1 || place1 - place2 == 1)
                     {
-                        if (fltime1 == 1)
+                        if (sitting1 == sitting2)
                         {
-                            ltime1 = 2;
-                            Console.WriteLine("Игрок 2 отбил атаку чистым блоком");
+                            if (fltime1 == 1)
+                            {
+                                ltime1 = 2;
+                                Console.WriteLine("Игрок 2 отбил атаку чистым блоком");
+                            }
                         }
-                    }
-                    else if (sitting1 != sitting2)
-                    {
-                        if (fltime1 == 1)
+                        else
                         {
-                            Console.WriteLine("Игрок 2 не туда поставил чистый блок");
+                            if (fltime1 == 1)
+                            {
+                                Console.WriteLine("Игрок 2 не туда поставил чистый блок");
+                            }
                         }
-                    }
-                    if (ltime1 == 0)
-                    {
-                        if (block2 == false)
+                        if (ltime1 == 0)
                         {
-                            health2 -= 10;
-                            Console.WriteLine("Игрок 2 получил урон");
-                        }
-                        else if (block2 == true)
-                        {
-                            health2 -= 0.5;
-                            Console.WriteLine("Игрок 2 заблокировал удар");
+                            if (block2 == false)
+                            {
+                                health2 -= 10;
+                                Console.WriteLine("Игрок 2 получил урон");
+                            }
+                            else
+                            {
+                                health2 -= 0.5;
+                                Console.WriteLine("Игрок 2 заблокировал удар");
+                            }
                         }
                     }
                 }
@@ -544,36 +547,39 @@ namespace MortalKombat
         }
         private static void striker2() // удар 2 игрока
         {
-            if (ts4.Milliseconds > 299 || ts4.Seconds > 0 || ts4.Milliseconds == 0 & ts8.Milliseconds > 299 || ts8.Seconds > 0 || ts8.Milliseconds == 0)
+            if (ts4.Milliseconds > 299 || ts4.Seconds > 0 || ts4.Milliseconds == 0)
             {
-                if (place2 - place1 == 1 || place1 - place2 == 1)
+                if (ts8.Milliseconds > 299 || ts8.Seconds > 0 || ts8.Milliseconds == 0)
                 {
-                    if (sitting1 == sitting2)
+                    if (place2 - place1 == 1 || place1 - place2 == 1)
                     {
-                        if (fltime2 == 1)
+                        if (sitting1 == sitting2)
                         {
-                            ltime2 = 2;
-                            Console.WriteLine("Игрок 1 отбил атаку чистым блоком");
+                            if (fltime2 == 1)
+                            {
+                                ltime2 = 2;
+                                Console.WriteLine("Игрок 1 отбил атаку чистым блоком");
+                            }
                         }
-                    }
-                    else if (sitting1 != sitting2)
-                    {
-                        if (fltime2 == 1)
+                        else
                         {
-                            Console.WriteLine("Игрок 1 не туда поставил чистый блок");
+                            if (fltime2 == 1)
+                            {
+                                Console.WriteLine("Игрок 1 не туда поставил чистый блок");
+                            }
                         }
-                    }
-                    if (ltime2 == 0)
-                    {
-                        if (block1 == false)
+                        if (ltime2 == 0)
                         {
-                            health1 -= 10;
-                            Console.WriteLine("Игрок 1 получил урон");
-                        }
-                        else if (block1 == true)
-                        {
-                            health1 -= 0.5;
-                            Console.WriteLine("Игрок 1 заблокировал удар");
+                            if (block1 == false)
+                            {
+                                health1 -= 10;
+                                Console.WriteLine("Игрок 1 получил урон");
+                            }
+                            else
+                            {
+                                health1 -= 0.5;
+                                Console.WriteLine("Игрок 1 заблокировал удар");
+                            }
                         }
                     }
                 }
@@ -588,7 +594,7 @@ namespace MortalKombat
                     block1 = true;
                     Console.WriteLine("Игрок 1 поставил блок");
                 }
-                else if (block1 == true)
+                else
                 {
                     block1 = false;
                     Console.WriteLine("Игрок 1 отпустил блок");
@@ -604,7 +610,7 @@ namespace MortalKombat
                     block2 = true;
                     Console.WriteLine("Игрок 2 поставил блок");
                 }
-                else if (block2 == true)
+                else
                 {
                     block2 = false;
                     Console.WriteLine("Игрок 2 отпустил блок");
@@ -688,13 +694,13 @@ namespace MortalKombat
                             place1--;
                             if (place2 > place1)
                                 Console.WriteLine("Игрок 1 переместился на клетку назад");
-                            else if (place1 > place2)
+                            else
                                 Console.WriteLine("Игрок 1 переместился на клетку вперёд");
                             if (place2 == place1 & topplat1 != topplat2)
                             {
                                 if (place2 != 1)
                                     place1--;
-                                else if (place2 == 1)
+                                else
                                     place1++;
                             }
                         }
@@ -707,7 +713,7 @@ namespace MortalKombat
                             stopwatch6.Start();
                         }
                     }
-                    else if (place1 > place2)
+                    else
                     {
                         if (ts1.Milliseconds < 300 & ts1.Milliseconds > 0 & ts1.Seconds == 0)
                         {
@@ -728,18 +734,17 @@ namespace MortalKombat
                         if (place1 - place2 >= 1 || place2 - place1 > 1 || topplat1 != topplat2)
                         {
                             place2--;
-                            if (place2 > place1)
-                                Console.WriteLine("Игрок 2 переместился на клетку вперёд");
-                            else if (place1 > place2)
+                            if (place1 > place2)
                                 Console.WriteLine("Игрок 2 переместился на клетку назад");
+                            else
+                                Console.WriteLine("Игрок 2 переместился на клетку вперёд");
                             if (place2 == place1 & topplat1 != topplat2)
-                                if (place2 == place1 & topplat1 != topplat2)
-                                {
-                                    if (place1 != 1)
-                                        place2--;
-                                    else if (place1 == 1)
-                                        place2++;
-                                }
+                            {
+                                if (place1 != 1)
+                                    place2--;
+                                else
+                                    place2++;
+                            }
                         }
                     }
                     if (place2 > place1)
@@ -749,7 +754,7 @@ namespace MortalKombat
                             stopwatch4.Start();
                         }
                     }
-                    else if (place1 > place2)
+                    else
                     {
                         stopwatch3.Start();
                         if (ts7.Milliseconds < 300 & ts7.Milliseconds > 0 & ts7.Seconds == 0)
@@ -771,15 +776,15 @@ namespace MortalKombat
                         if (place1 - place2 >= 1 || place2 - place1 > 1 || topplat1 != topplat2)
                         {
                             place1++;
-                            if (place2 > place1)
-                                Console.WriteLine("Игрок 1 переместился на клетку вперёд");
-                            else if (place1 > place2)
+                            if (place1 > place2)
                                 Console.WriteLine("Игрок 1 переместился на клетку назад");
+                            else
+                                Console.WriteLine("Игрок 1 переместился на клетку вперёд");
                             if (place2 == place1 & topplat1 != topplat2)
                             {
                                 if (place2 != 10)
                                     place1++;
-                                else if (place2 == 10)
+                                else
                                     place1--;
                             }
                         }
@@ -791,7 +796,7 @@ namespace MortalKombat
                             stopwatch2.Start();
                         }
                     }
-                    else if (place1 > place2)
+                    else
                     {
                         stopwatch1.Start();
                         if (ts5.Milliseconds < 300 & ts5.Milliseconds > 0 & ts5.Seconds == 0)
@@ -815,13 +820,13 @@ namespace MortalKombat
                             place2++;
                             if (place2 > place1)
                                 Console.WriteLine("Игрок 2 переместился на клетку назад");
-                            else if (place1 > place2)
+                            else
                                 Console.WriteLine("Игрок 2 переместился на клетку вперёд");
                             if (place2 == place1 & topplat1 != topplat2)
                             {
                                 if (place1 != 10)
                                     place2++;
-                                else if (place1 == 10)
+                                else
                                     place2--;
                             }
                         }
@@ -834,7 +839,7 @@ namespace MortalKombat
                             stopwatch8.Start();
                         }
                     }
-                    else if (place1 > place2)
+                    else
                     {
                         if (ts3.Milliseconds < 300 & ts3.Milliseconds > 0 & ts3.Seconds == 0)
                         {
@@ -853,7 +858,7 @@ namespace MortalKombat
                     sitting1 = false;
                     Console.WriteLine("Игрок 1 встал");
                 }
-                else if (sitting1 == false)
+                else
                 {
                     if (topplat1 == false)
                     {
@@ -872,7 +877,7 @@ namespace MortalKombat
                     sitting2 = false;
                     Console.WriteLine("Игрок 2 встал");
                 }
-                else if (sitting2 == false)
+                else
                 {
                     if (topplat2 == false)
                     {
@@ -886,37 +891,32 @@ namespace MortalKombat
         {
             if (ts2.Milliseconds < 300 & ts2.Milliseconds > 0 & ts2.Seconds == 0)
             {
-                if (ltime1 == 0)
-                {
                     if (block2 == false)
                     {
                         if (sitting1 == sitting2)
                         {
                             if (place2 > place1)
                                 place2 = place1 + 1;
-                            else if (place1 > place2)
+                            else
                                 place2 = place1 - 1;
                             Console.WriteLine("Игрок 1 использовал спецприём Гарпун");
                             Console.WriteLine("GET OVER HERE!");
                         }
-                        else if (sitting1 != sitting2)
+                        else
                         {
                             Console.WriteLine("Игрок 2 увернулся от цепи");
                         }
                     }
-                    else if (block2 == true)
+                    else
                     {
                         Console.WriteLine("Игрок 2 заблокировал цепь");
                     }
-                }
             }
         }
         private static void buttonI() // если нажал на I (для спецприёма Выстрел Из Арбалета 1 игрока)
         {
             if (ts2.Milliseconds < 300 & ts2.Milliseconds > 0 & ts2.Seconds == 0)
             {
-                if (ltime1 == 0)
-                {
                     if (block2 == false)
                     {
                         if (sitting1 == sitting2)
@@ -924,31 +924,28 @@ namespace MortalKombat
                             health2 -= 10;
                             Console.WriteLine("Игрок 1 использовал спецприём Выстрел Из Арбалета");
                         }
-                        else if (sitting1 != sitting2)
+                        else
                         {
                             Console.WriteLine("Игрок 2 увернулся от стрелы");
                         }
                     }
-                    else if (block2 == true)
+                    else
                     {
                         health2 -= 0.5;
                         Console.WriteLine("Игрок 2 заблокировал стрелу");
                     }
-                }
             }
         }
         private static void buttonK() // если нажал на K (для спецприёма Телепорт 1 игрока)
         {
             if (ts6.Milliseconds < 300 & ts6.Milliseconds > 0 & ts6.Seconds == 0)
             {
-                if (ltime1 == 0)
-                {
                     if (block2 == false)
                     {
                         health2 -= 10;
                         Console.WriteLine("Игрок 1 использовал спецприём Телепорт");
                     }
-                    else if (block2 == true)
+                    else
                     {
                         Console.WriteLine("Игрок 2 заблокировал телепорт");
                     }
@@ -956,70 +953,54 @@ namespace MortalKombat
                     {
                         if (place2 != 10)
                             place1 = place2 + 1;
-                        else if (place2 == 10)
+                        else
                         {
                             place2 = 9;
                             place1 = 10;
                         }
                     }
-                    else if (place1 > place2)
+                    else
                     {
                         if (place2 != 1)
                             place1 = place2 - 1;
-                        else if (place2 == 1)
+                        else
                         {
                             place2 = 2;
                             place1 = 1;
                         }
                     }
-                }
             }
         }
         private static void button4() // если нажал на 4 (для спецприёма Гарпун 2 игрока)
         {
             if (ts4.Milliseconds < 300 & ts4.Milliseconds > 0 & ts4.Seconds == 0)
             {
-                if (fltime2 == 1)
-                {
-                    ltime2 = 2;
-                    Console.WriteLine("Игрок 1 отбил атаку чистым блоком");
-                }
-                if (ltime2 == 0)
-                {
                     if (block1 == false)
                     {
                         if (sitting1 == sitting2)
                         {
                             if (place2 > place1)
                                 place1 = place2 - 1;
-                            else if (place1 > place2)
+                            else
                                 place1 = place2 + 1;
                             Console.WriteLine("Игрок 2 использовал спецприём Гарпун");
                             Console.WriteLine("GET OVER HERE!");
                         }
-                        else if (sitting1 != sitting2)
+                        else
                         {
                             Console.WriteLine("Игрок 1 увернулся от цепи");
                         }
                     }
-                    else if (block1 == true)
+                    else
                     {
                         Console.WriteLine("Игрок 1 заблокировал цепь");
                     }
-                }
             }
         }
         private static void button1() // если нажал на 1 (для спецприёма Выстрел Из Арбалета 2 игрока)
         {
             if (ts4.Milliseconds < 300 & ts4.Milliseconds > 0 & ts4.Seconds == 0)
             {
-                if (fltime2 == 1)
-                {
-                    ltime2 = 2;
-                    Console.WriteLine("Игрок 1 отбил атаку чистым блоком");
-                }
-                if (ltime2 == 0)
-                {
                     if (block1 == false)
                     {
                         if (sitting1 == sitting2)
@@ -1027,31 +1008,28 @@ namespace MortalKombat
                             health1 -= 10;
                             Console.WriteLine("Игрок 2 использовал спецприём Выстрел Из Арбалета");
                         }
-                        else if (sitting1 != sitting2)
+                        else
                         {
                             Console.WriteLine("Игрок 1 увернулся от стрелы");
                         }
                     }
-                    else if (block1 == true)
+                    else
                     {
                         health1 -= 0.5;
                         Console.WriteLine("Игрок 1 заблокировал стрелу");
                     }
-                }
             }
         }
         private static void button2() // если нажал на 2 (для спецприёма Телепорт 2 игрока)
         {
             if (ts8.Milliseconds < 300 & ts8.Milliseconds > 0 & ts8.Seconds == 0)
             {
-                if (ltime2 == 0)
-                {
                     if (block1 == false)
                     {
                         health1 -= 10;
                         Console.WriteLine("Игрок 2 использовал спецприём Телепорт");
                     }
-                    else if (block1 == true)
+                    else
                     {
                         Console.WriteLine("Игрок 1 заблокировал телепорт");
                     }
@@ -1059,23 +1037,22 @@ namespace MortalKombat
                     {
                         if (place1 != 1)
                             place2 = place1 - 1;
-                        else if (place1 == 1)
+                        else
                         {
                             place1 = 2;
                             place2 = 1;
                         }
                     }
-                    else if (place1 > place2)
+                    else
                     {
                         if (place1 != 10)
                             place2 = place1 + 1;
-                        else if (place1 == 10)
+                        else
                         {
                             place1 = 9;
                             place2 = 10;
                         }
                     }
-                }
             }
         }
         private static void menu() // меню
